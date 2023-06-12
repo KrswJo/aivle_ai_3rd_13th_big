@@ -55,7 +55,9 @@ INSTALLED_APPS = [
 # 관련된 오류가 생기면 숫자를 바꾸거나, 장고쉘을 사용하거나 DB에 저장된 값을 바꾸면 됨
 SITE_ID = 1
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -145,7 +147,11 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 LOGIN_REDIRECT_URL = "/"
 ACCOUNT_AUTHENTICATED_LOGOUT_REDIRECTS = True
 ACCOUNT_LOGOUT_REDIRECT_URL = "/"
+ACCOUNT_SIGNUP_REDIRECT_URL = "/"
