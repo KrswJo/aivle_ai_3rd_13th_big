@@ -2,3 +2,5 @@ db.sqlite3
 .idea/
 __pycache__
 db.sqlite3
+static/img
+*/migrations/*
