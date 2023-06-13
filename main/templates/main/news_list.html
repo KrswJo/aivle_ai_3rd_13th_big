@@ -57,7 +57,7 @@
                 <p class="mb-0 fs-4">It is a food ai analysis-based Service for foreigners traveling to Korea.</p>
             </div>
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                {% for p in news_list %}
+                {% for p in news_list|slice:":5" %}
                     <div class="testimonial-item position-relative bg-white p-5 mt-4">
                         <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
                         <p class="mb-4">{{p.content}}</p>
