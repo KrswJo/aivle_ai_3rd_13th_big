@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'main',
+    'board'
 ]
 
 # 반드시 추가해야 함
