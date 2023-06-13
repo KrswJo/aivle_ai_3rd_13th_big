@@ -18,9 +18,10 @@
                                 <div class="card-body p-5">
                                     <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
                                     <form autocomplete="off" class="needs-validation" method="POST" novalidate="">
+                                        {% csrf_token %}
                                         <div class="mb-3">
                                             <label class="mb-2 text-muted" for="email">Email</label>
-                                            <input autofocus class="form-control" id="email" name="email"
+                                            <input autofocus class="form-control" id="email" name="login"
                                                    required type="email" value="">
                                             <div class="invalid-feedback">
                                                 Email is invalid
@@ -43,6 +44,8 @@
                                                 </a>
                                             </div>
                                         </div>
+
+
                                         <div class="d-flex align-items-center">
                                             <button class="btn btn-primary ms-auto" type="submit">
                                                 Login
@@ -50,6 +53,8 @@
                                         </div>
                                     </form>
                                 </div>
+
+
                                 <div class="card-footer py-3 border-0">
                                     <div class="text-center">
                                         <a class="text-dark" href="/accounts/signup">Sign Up</a>

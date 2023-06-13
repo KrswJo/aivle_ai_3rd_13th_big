@@ -169,3 +169,4 @@ ACCOUNT_SIGNUP_REDIRECT_URL = "/"
 ACCOUNT_AUTHENTICATION_METHOD = 'email'  # 로그인시 username 이 아니라 email을 사용하게 하는 설정
 ACCOUNT_EMAIL_REQUIRED = True  # 회원가입시 필수 이메일을 필수항목으로 만들기
 ACCOUNT_USERNAME_REQUIRED = False  # USERNAME 을 필수항목에서 제거
+ACCOUNT_LOGOUT_ON_GET = True
