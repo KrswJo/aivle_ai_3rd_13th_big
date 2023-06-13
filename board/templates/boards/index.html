@@ -16,7 +16,7 @@
                 <tbody>
                   {% for post in board_list %}
                   <tr>
-                    <td>{{forloop.revcounter}}</td>
+                    <td>{{post.id}}</td>
                     <td><a href="{% url 'boards:detail' post.id %}">{{post.title}}</a></td>
                     <td>{{post.author}}</td>
                     <td>{{post.content|truncatewords:5}}</td>
