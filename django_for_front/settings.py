@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'main'
 ]
 
 # 반드시 추가해야 함
@@ -73,7 +74,7 @@ ROOT_URLCONF = "django_for_front.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates']
+        "DIRS": []
         ,
         "APP_DIRS": True,
         "OPTIONS": {

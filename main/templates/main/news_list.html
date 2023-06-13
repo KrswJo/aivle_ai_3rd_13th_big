@@ -2,7 +2,6 @@
 {% load static %}
 {% block header %} {% endblock %}
 {% block content %}
-<div class="container p-3"></div>
     
     <!-- Feature Start -->
     <div class="container-fluid bg-light bg-icon my-5 py-6 mb-0">
@@ -58,6 +57,20 @@
                 <p class="mb-0 fs-4">It is a food ai analysis-based Service for foreigners traveling to Korea.</p>
             </div>
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                {% for p in news_list %}
+                    <div class="testimonial-item position-relative bg-white p-5 mt-4">
+                        <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
+                        <p class="mb-4">{{p.content}}</p>
+                        <div class="d-flex align-items-center">
+                            <img class="flex-shrink-0 rounded-circle" src="{{p.profile}}" alt="">
+                            <div class="ms-3">
+                                <h5 class="mb-1">{{p.client_name}}</h5>
+                                <span>{{p.real_name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                
                 <div class="testimonial-item position-relative bg-white p-5 mt-4">
                     <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
                     <p class="mb-4">불닭 존맛탱.</p>
