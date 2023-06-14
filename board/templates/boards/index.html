@@ -1,3 +1,4 @@
+{% load board_filter %}
 <html>
 <body>
     <div class="row mt-5">
@@ -16,7 +17,7 @@
                 <tbody>
                   {% for post in board_list %}
                   <tr>
-                    <td>{{post.id}}</td>
+                    <td>{{ board_list.paginator.count|sub:board_list.start_index|sub:forloop.counter0|add:1 }}</td>
                     <td><a href="{% url 'boards:detail' post.id %}">{{post.title}}</a></td>
                     <td>{{post.author}}</td>
                     <td>{{post.content|truncatewords:5}}</td>
@@ -31,7 +32,6 @@
           </div>
           <div class="row">
             <div class="col-12">
-              {% comment %} <button class="btn btn-primary" onclick = "location.href = '/board/new' ">글쓰기</button> {% endcomment %}
               <a href="{%url 'boards:new' %}" class="btn btn-primary" >글쓰기</a> 
             </div>
         </div>
@@ -54,6 +54,3 @@
         </div>
   </body>
 </html>
-
-
-{% comment %} {{board_list}} {% endcomment %}
