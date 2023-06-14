@@ -26,6 +26,15 @@ def new(request):
     context = {'form': form,}
     return render(request, 'boards/new.html', context)
 
+def create(request):
+    if request.method == "POST":
+        title = request.POST.get('title')
+        author = request.user
+        contents = request.POST.get('contents')
+        Board.objects.create(title=title, author=author, contents=contents)
+        return redirect('boards:index')
+
+
 def detail(request, pk):
     board_list = get_object_or_404(Board, id=pk)
     context = {'board_list': board_list}
