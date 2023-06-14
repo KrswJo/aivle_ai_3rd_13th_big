@@ -31,14 +31,10 @@ def create(request):
         title = request.POST.get('title')
         author = request.user
         contents = request.POST.get('contents')
-        Board.objects.create(title=title, author=author, contents=contents)
+        nickname = request.user.nickname
+        Board.objects.create(title=title, author=author, contents=contents, nickname = nickname)
         return redirect('boards:index')
 
-
-def detail(request, pk):
-    board_list = get_object_or_404(Board, id=pk)
-    context = {'board_list': board_list}
-    return render(request, 'boards/detail.html', context)
 
 def edit(request, pk):
     post = get_object_or_404(Board, id=pk)
@@ -56,3 +52,8 @@ def delete(request, pk):
     post = get_object_or_404(Board, id=pk)
     post.delete()
     return redirect('boards:index')
+
+def detail(request, pk):
+    board_list = get_object_or_404(Board, id=pk)
+    context = {'board_list': board_list}
+    return render(request, 'boards/detail.html', context)

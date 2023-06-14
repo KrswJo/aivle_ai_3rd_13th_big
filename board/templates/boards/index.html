@@ -8,8 +8,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">제목</th>
-                    <th scope="col">아이디</th>
-                    <th scope="col">작성일</th>
+                    <th scope="col">닉네임</th>
                     <th scope="col">최종수정일</th>
                     <th scope="col">조회수</th>
                     <th scope="col">비고</th>
@@ -20,8 +19,8 @@
                   <tr>
                     <td>{{ board_list.paginator.count|sub:board_list.start_index|sub:forloop.counter0|add:1 }}</td>
                     <td><a href="{% url 'boards:detail' post.id %}">{{post.title}}</a></td>
-                    <td>{{post.author}}</td>
-                    <td>{{post.content|truncatewords:5}}</td>
+                    <td>{{post.nickname}}</td>
+                    {% comment %} <td>{{post.content|truncatewords:5}}</td> {% endcomment %}
                     <td>{{post.published_date|date:"Y-m-d"}}</td>
                     <td>{{post.hit}}</td>
                     <a href="{% url 'boards:edit' post.id %}" class="btn btn-outline-info btn-sm">수정</a>
