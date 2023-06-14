@@ -23,19 +23,33 @@
                                             <label class="mb-2 text-muted" for="email">Email</label>
                                             <input autofocus class="form-control" id="email" name="login"
                                                    required type="email" value="">
-                                            <div class="invalid-feedback">
-                                                Email is invalid
-                                            </div>
+                                            {% if form.login.errors %}
+                                                    {% for error in form.login.errors %}
+                                                      <p>* {{ error|linebreaksbr }}</p>
+                                                    {% endfor %}
+                                            {% endif %}
                                         </div>
 
                                         <div class="mb-3">
                                             <label class="mb-2 text-muted" for="email">Password</label>
                                             <input class="form-control" id="password" name="password"
                                                    required type="password">
-                                            <div class="invalid-feedback">
-                                                Password is required
-                                            </div>
+                                            {% if form.password.errors %}
+                                                    {% for error in form.password.errors %}
+                                                      <p>* {{ error|linebreaksbr }}</p>
+                                                    {% endfor %}
+                                            {% endif %}
                                         </div>
+                                          {% if form.errors %}
+                                          <div class="alert alert-danger" role="alert">
+                                            <strong>Error:</strong>
+                                            {% for field, error_list in form.errors.items %}
+                                              {% for error in error_list %}
+                                                {{ error }}
+                                              {% endfor %}
+                                            {% endfor %}
+                                          </div>
+                                        {% endif %}
 
                                         <div class="d-flex align-items-center">
                                             <div class="mb-2 w-100">
