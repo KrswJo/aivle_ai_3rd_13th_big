@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css" />
     <!-- JavaScript 파일 -->
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <script src="{% static 'js/post.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -27,30 +28,17 @@
                     <input id="signup_nickname" type="text" class="form-control" name="title"
                            value="" required autofocus>
                     </div>
-
                 <div class="mb-3">
                     <label class="mb-2 text-muted" for="contents">Content</label>
                     <div id="editor"></div>
-                    <textarea id="contents" name="contents" style="display: none;"></textarea>
+{#                    <textarea id="contents" name="contents" style="display: none;"></textarea>#}
                 </div>
 
                 <div style="padding: 5px 0px 5px 50px ; float:right;">
                     <input class="btn btn-primary" type="submit" value="Post Registration">
-                    <a href="#" class="btn btn-primary">List of posts</a>
+                    <a href="{% url "boards:index" %}" class="btn btn-primary">List of posts</a>
                 </div>
             </form>
         </div>
     </div>
-
-    <script>
-        // 에디터 컨테이너 요소를 가져옵니다.
-        const editorElement = document.querySelector('#editor');
-
-        // 에디터 인스턴스를 생성하고 초기화합니다.
-        const editor = new toastui.Editor({
-          el: editorElement,
-          initialEditType: 'wysiwyg', // WYSIWYG 모드로 시작합니다.
-          previewStyle: 'vertical', // 미리보기 스타일을 수직 방향으로 설정합니다.
-        });
-    </script>
 {% endblock %}
