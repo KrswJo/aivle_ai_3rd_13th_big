@@ -1,13 +1,19 @@
 from django import forms
 from django.forms import widgets
-from .models import Board
+from .models import Board,Comment
 
 class RegistForm(forms.ModelForm):
     class Meta:
         model = Board
-        fields = ['title', 'contents']  # '__all__'
+        fields = ['title', 'contents']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            # 'author': forms.TextInput(attrs={'class': 'form-control'}),
             'contents': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),
         }
+        
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ['contents']
+        #exclude = ('board', 'user',)

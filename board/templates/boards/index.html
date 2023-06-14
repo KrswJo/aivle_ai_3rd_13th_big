@@ -23,8 +23,8 @@
                     {% comment %} <td>{{post.content|truncatewords:5}}</td> {% endcomment %}
                     <td>{{post.published_date|date:"Y-m-d"}}</td>
                     <td>{{post.hit}}</td>
-                    <a href="{% url 'boards:edit' post.id %}" class="btn btn-outline-info btn-sm">수정</a>
-                    <a href="{% url 'boards:delete' post.id %}" onclick="if(!confirm('정말 삭제하시겠습니까?')){return false;}" class="btn btn-outline-danger btn-sm">삭제</a>
+                    {% comment %} <a href="{% url 'boards:edit' post.id %}" class="btn btn-outline-info btn-sm">수정</a>
+                    <a href="{% url 'boards:delete' post.id %}" onclick="if(!confirm('정말 삭제하시겠습니까?')){return false;}" class="btn btn-outline-danger btn-sm">삭제</a> {% endcomment %}
                   </tr>
                   {% endfor %}
                 </tbody>
