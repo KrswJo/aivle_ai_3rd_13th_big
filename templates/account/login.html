@@ -16,11 +16,11 @@
                             </div>
                             <div class="card shadow-lg">
                                 <div class="card-body p-5">
-                                    <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
+                                    <h1 class="fs-4 card-title fw-bold mb-4">로그인</h1>
                                     <form autocomplete="off" class="needs-validation" method="POST" novalidate="">
                                         {% csrf_token %}
                                         <div class="mb-3">
-                                            <label class="mb-2 text-muted" for="email">Email</label>
+                                            <label class="mb-2 text-muted" for="email">이메일</label>
                                             <input autofocus class="form-control" id="email" name="login"
                                                    required type="email" value="">
                                             {% if form.login.errors %}
@@ -31,7 +31,7 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="mb-2 text-muted" for="email">Password</label>
+                                            <label class="mb-2 text-muted" for="email">비밀번호</label>
                                             <input class="form-control" id="password" name="password"
                                                    required type="password">
                                             {% if form.password.errors %}
@@ -54,7 +54,7 @@
                                         <div class="d-flex align-items-center">
                                             <div class="mb-2 w-100">
                                                 <a class="float-end" href="/member/password">
-                                                    Reset Password
+                                                    비밀번호 찾기
                                                 </a>
                                             </div>
                                         </div>
@@ -62,7 +62,7 @@
 
                                         <div class="d-flex align-items-center">
                                             <button class="btn btn-primary ms-auto" type="submit">
-                                                Login
+                                                로그인
                                             </button>
                                         </div>
                                     </form>
@@ -71,7 +71,7 @@
 
                                 <div class="card-footer py-3 border-0">
                                     <div class="text-center">
-                                        <a class="text-dark" href="/member/signup">Sign Up</a>
+                                        <a class="text-dark" href="/member/signup">회원가입</a>
                                     </div>
                                 </div>
                             </div>
