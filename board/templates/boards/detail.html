@@ -1,5 +1,18 @@
-{{board_list.update_counter}}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+        <!-- CSS 파일 -->
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css" />
+    <!-- JavaScript 파일 -->
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <scirpt src="{% static 'js/board.js' %}"></scirpt>
+</head>
+
 <body>
+{{board_list.update_counter}}
     <div class="container">
         <div class="row pt-4 my-3">
             <div class="col-md-12">
@@ -14,7 +27,8 @@
                 <tr>
                     <td>
                         <p>[글 내용]</p>
-                        {{ board_list.contents|linebreaks }}
+                        <div id="editor"></div>
+                        {#                        {{ board_list.contents|linebreaks }}#}
                         <p><small style="color:silver;text-align:right;">[{{ board_list.published_date|date:"Y-m-d H:i:s" }}]</small></p>
                     </td>
                 </tr>
@@ -71,3 +85,14 @@
     {% endif %}
 
 </body>
+
+<script>
+        // 에디터 컨테이너 요소를 가져옵니다.
+        let contents = "{{ board_list.contents }}";
+
+        convertedContents = parseContents(contents);
+        setContents("#editor", convertedContents);
+</script>
+
+
+</html>
