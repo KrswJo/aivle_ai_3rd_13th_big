@@ -7,30 +7,32 @@
     <div class="container-fluid bg-light bg-icon my-5 py-6 mb-0">
         <div class="container">
             <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <h1 class="display-5 mb-3">Our Service</h1>
-                <p class="mb-0 fs-4">It is a food ai analysis-based Service for foreigners traveling to Korea.</p>
+                <h4 class="display-5 mb-3">창고형 매장</h4>
+                <h4 class="display-5 mb-3">무인결제 시스템</h4>
+                <p class="mb-0 fs-4">매일 기다렸던 계산대 대기!</p>
+                <p class="mb-0 fs-4">이제 카트와 빠르게 나갑시다!</p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="bg-white text-center h-100 p-4 p-xl-5">
-                        <img class="img-fluid mb-4 feature_img_size" src="{% static 'img/search.svg' %}" alt="" >
-                        <h4 class="mb-3">Natural Process</h4>
-                        <p class="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
+                        <img class="img-fluid mb-4 feature_img_size" src="{% static 'img/phone-camera.svg' %}" alt="" >
+                        <h4 class="mb-3">사진찍고</h4>
+                        <p class="mb-4">사용자는 상품 사진을 찍어 시스템이 상품을 인식하고</p>
                         <a class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href="">Read More</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="bg-white text-center h-100 p-4 p-xl-5">
-                        <img class="img-fluid mb-4 feature_img_size" src="{% static 'img/food2.svg' %}" alt="">
-                        <h4 class="mb-3">Organic Products</h4>
+                        <img class="img-fluid mb-4 feature_img_size" src="{% static 'img/cart.svg' %}" alt="">
+                        <h4 class="mb-3">장바구니에 담고</h4>
                         <p class="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
                         <a class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href="">Read More</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="bg-white text-center h-100 p-4 p-xl-5">
-                        <img class="img-fluid mb-4 feature_img_size" src="{% static 'img/board.svg' %}" alt="">
-                        <h4 class="mb-3">Biologically Safe</h4>
+                        <img class="img-fluid mb-4 feature_img_size" src="{% static 'img/credict-phone.svg' %}" alt="">
+                        <h4 class="mb-3">결제하고</h4>
                         <p class="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
                         <a class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href="">Read More</a>
                     </div>
@@ -53,8 +55,8 @@
     <div class="container-fluid bg-light bg-icon py-6 -2">
         <div class="container">
             <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <h1 class="display-5 mb-3">Top 5 products that users searched a lot</h1>
-                <p class="mb-0 fs-4">It is a food ai analysis-based Service for foreigners traveling to Korea.</p>
+                <h1 class="display-5 mb-3">많이 팔린 상품 Best 5</h1>
+                <p class="mb-0 fs-4">현재까지 가장 많이 팔린 상품을 보여드립니다!</p>
             </div>
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
                 {% for p in news_list|slice:":5" %}
