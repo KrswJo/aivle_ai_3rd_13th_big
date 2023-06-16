@@ -19,9 +19,11 @@
         <div class="container">
             <div class="row g-5 justify-content-center ">
                 <div class="col-md-12">
-                    <h3>{{ board_list.title }}</h3>
-                    <p><small style="color:silver;text-align:right;">[{{ board_list.published_date|date:"Y-m-d H:i:s" }}]</small>
-                    </p>
+                    <h2>{{ board_list.title }}</h2>
+                    <br>
+                    <i class="fa-solid fa-user"></i>
+                    {{board_list.nickname}}
+                    <p><small style="color:silver;text-align:right;">{{ board_list.published_date|date:"Y.m.d H:i" }}</small></p>
                 </div>
             </div>
             <div id="editor"></div>
@@ -49,19 +51,20 @@
                                     {% if user == comment.user %}
                                         <form action="{% url 'boards:comments_delete' board_list.pk comment.pk %}"
                                               method="POST">
-                                            {{ comment.user.nickname }} [작성자] [{{ comment.published_date|date:"Y-m-d H:i:s" }}]
+                                            <i class="fa-solid fa-user"></i> &nbsp;{{ comment.user.nickname }} [작성자] 
 
                                             {% csrf_token %}
                                             <input type="submit" class="float-end btn btn-danger" value="삭제">
                                         </form>
                                     {% else %}
-                                        {{ comment.user.nickname }} [{{ comment.published_date|date:"Y-m-d H:i:s" }}]
+                                    <i class="fa-solid fa-user"></i> &nbsp;{{ comment.user.nickname }}
                                     {% endif %}
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="rounded-1 border-2 border-primary">
                                     {{ comment.contents }}
+                                    <div><small style="color:silver;text-align:right;">{{ comment.published_date|date:"Y.m.d H:i" }}</small></div>
                                 </div>
                             </div>
                         </div>
