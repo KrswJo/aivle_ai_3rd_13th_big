@@ -23,4 +23,4 @@ class Comment(models.Model):
     published_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.content
+        return self.contents
