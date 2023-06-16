@@ -85,7 +85,7 @@ def comments_create(request, pk):
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.board = board
-            comment.nickname = request.user
+            comment.nickname = request.user.nickname
             comment.user_id = request.user.pk
             comment.save()
         return redirect('boards:detail', board.pk)
