@@ -5,6 +5,7 @@ class Board(models.Model):
     contents    = models.TextField(verbose_name="내용")
     author      = models.ForeignKey("member.User", on_delete = models.CASCADE)
     hit         = models.PositiveIntegerField(default = 0)
+    created_date  = models.DateTimeField(auto_now_add=True)
     published_date  = models.DateTimeField(auto_now=True, verbose_name="최종수정일")
     nickname    = models.CharField(max_length=100)
 
