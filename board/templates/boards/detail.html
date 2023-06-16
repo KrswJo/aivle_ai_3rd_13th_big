@@ -1,101 +1,100 @@
-{% extends 'base.html' %}
-
 {% load static %}
-
-{% block header %}
-    <!-- CSS 파일 -->
-    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css"/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+        <!-- CSS 파일 -->
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css" />
     <!-- JavaScript 파일 -->
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <script src="{% static 'js/board.js' %}"></script>
-{% endblock %}
+</head>
 
-{% block content %}
-    <div style="display: none">
-        {{ board_list.update_counter }}
-    </div>
-
-    <div class="container p-3"></div>
-    <div class="container-xxl py-6 mt-5">
-        <div class="container">
-            <div class="row g-5 justify-content-center ">
-                <div class="col-md-12">
-                    <h3>{{ board_list.title }}</h3>
-                    <p><small style="color:silver;text-align:right;">[{{ board_list.published_date|date:"Y-m-d H:i:s" }}]</small>
-                    </p>
-                </div>
-            </div>
-            <div id="editor"></div>
-
-            <div class="row my-3"></div>
-            <div class="container">
-                <div style="padding: 2px 20px; float:right;">
-                    <a href="{% url 'boards:index' %}" class="btn btn-primary">글 목록</a>
-
-                    {% if user == board_list.author %}
-                        <a href="{% url 'boards:edit' board_list.pk %}" class="btn btn-light">수정</a>
-                        <a href="{% url 'boards:delete' board_list.pk %}"
-                           onclick="if(!confirm('정말 삭제하시겠습니까?')){return false;}"
-                           class="btn btn-danger">삭제</a>
-                    {% endif %}
-                </div>
-            </div>
-
-            <div class="row my-5"></div>
-
-            <div class="container">
-                <h3>댓글 ({% if comments %}{{ comments|length }}{% else %}{{ 0 }}{% endif %})</h3>
-                    {% for comment in comments %}
-                        <div class="card mb-2">
-                            <div class="card-header bg-body">
-                                <div>
-                                    {% if user == comment.user %}
-                                        <form action="{% url 'boards:comments_delete' board_list.pk comment.pk %}"
-                                              method="POST">
-                                            {{ comment.user }} [작성자]
-
-                                            {% csrf_token %}
-                                            <input type="submit" class="float-end btn btn-danger" value="삭제">
-                                        </form>
-                                    {% else %}
-                                        {{ comment.user }}
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="rounded-1 border-2 border-primary">
-                                    {{ comment.contents }}
-                                </div>
-                            </div>
-                        </div>
-                    {% empty %}
-                        <p>댓글이 없어여,,( ˃̣̣̥᷄⌓˂̣̣̥᷅ )</p>
-                    {% endfor %}
-                </ul>
-                <hr>
-                <!--create-->
-                {% if request.user.is_authenticated %}
-                    <form action="{% url 'boards:comments_create' board_list.pk %}" method="POST">
-                        {% csrf_token %}
-                        <div class="card">
-                            <div class="card-body">{{ request.user }}</div>
-                            <textarea class="card-body border-0" name="contents"></textarea>
-                            <div class="card-body">
-                                <input type="submit" class="btn btn-primary float-end" value="작성하기">
-                            </div>
-                        </div>
-                    </form>
-                {% endif %}
+<body>
+<div style="display: none">
+    {{board_list.update_counter}}
+</div>
+    <div class="container">
+        <div class="row pt-4 my-3">
+            <div class="col-md-12">
+                <h3>글 세부 내용</h3>
             </div>
         </div>
+        <div class="row my-3">
+            <table class="table table-bordered">
+                <tr>
+                    <td>[글 제목] : {{ board_list.title }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>[글 내용]</p>
+                        <div id="editor"></div>
+                        {#                        {{ board_list.contents|linebreaks }}#}
+                        <p><small style="color:silver;text-align:right;">[{{ board_list.published_date|date:"Y-m-d H:i:s" }}]</small></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="padding: 2px 20px; float:right;">
+            <a href="{% url 'boards:index' %}" class="btn btn-primary">글 목록</a>
+        </div>
     </div>
+    {% if user == board_list.author %}
+        <a href="{% url 'boards:edit' board_list.pk %}">수정</a>
+        <a href="{% url 'boards:delete' board_list.pk %}" onclick="if(!confirm('정말 삭제하시겠습니까?')){return false;}" class="btn btn-outline-danger btn-sm">삭제</a>
+        {% comment %} <form action="{% url 'boards:delete' board_list.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="DELETE">
+        </form> {% endcomment %}
+    {% endif %}
 
-    <script>
+    <h3>댓글목록</h3>
+    {% if comments %}
+    <p><b>{{ comments|length }}개의 댓글이 있습니다.</b></p>
+    {% endif %}
+    <ul>
+        {% for comment in comments %}
+        <li>
+            {{ comment.user }} - {{ comment.content }}
+            <!--delete-->
+            {% if user == comment.user %}
+            <form action="{% url 'boards:comments_delete' board_list.pk comment.pk %}" method="POST" class="d-inline">
+                {% csrf_token %}
+                <input type="submit" value="DELETE">
+            </form>
+            {% endif %}
+        </li>
+        {% empty %}
+        <p>댓글이 없어여,,( ˃̣̣̥᷄⌓˂̣̣̥᷅ )</p>
+        {% endfor %}
+    </ul>
+    <hr>
+    <!--create-->
+    {% if request.user.is_authenticated %}
+        <form action="{% url 'boards:comments_create' board_list.pk %}" method="POST">
+        {% csrf_token %}
+        {{ comment_form }}
+        <input type="submit">
+        </form>
+    {% comment %} {% else %}
+        <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a> {% endcomment %}
+        {% for comment in comments %}
+            <li>{{ comment.content }}</li>
+        {% empty %}
+            <p>아직 댓글이 없습니다.</p>
+        {% endfor %}
+    {% endif %}
+
+</body>
+
+<script>
         // 에디터 컨테이너 요소를 가져옵니다.
         let contents = "{{ board_list.contents }}";
 
         convertedContents = parseContents(contents);
         setContents("#editor", convertedContents);
-    </script>
+</script>
 
-{% endblock %}
+
+</html>
