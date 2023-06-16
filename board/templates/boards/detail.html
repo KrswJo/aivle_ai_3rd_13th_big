@@ -75,7 +75,7 @@
                     <form action="{% url 'boards:comments_create' board_list.pk %}" method="POST">
                         {% csrf_token %}
                         <div class="card">
-                            <div class="card-body">{{ request.user }}</div>
+                            <div class="card-body">{{ request.user.nickname }}</div>
                             <textarea class="card-body border-0" name="contents"></textarea>
                             <div class="card-body">
                                 <input type="submit" class="btn btn-primary float-end" value="작성하기">
