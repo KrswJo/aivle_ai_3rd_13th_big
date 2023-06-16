@@ -49,13 +49,13 @@
                                     {% if user == comment.user %}
                                         <form action="{% url 'boards:comments_delete' board_list.pk comment.pk %}"
                                               method="POST">
-                                            {{ comment.user.nickname }} [작성자]
+                                            {{ comment.user.nickname }} [작성자] [{{ comment.published_date|date:"Y-m-d H:i:s" }}]
 
                                             {% csrf_token %}
                                             <input type="submit" class="float-end btn btn-danger" value="삭제">
                                         </form>
                                     {% else %}
-                                        {{ comment.user.nickname }}
+                                        {{ comment.user.nickname }} [{{ comment.published_date|date:"Y-m-d H:i:s" }}]
                                     {% endif %}
                                 </div>
                             </div>
