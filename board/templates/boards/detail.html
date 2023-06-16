@@ -14,7 +14,6 @@
     <div style="display: none">
         {{ board_list.update_counter }}
     </div>
-
     <div class="container p-3"></div>
     <div class="container-xxl py-6 mt-5">
         <div class="container">
@@ -40,9 +39,7 @@
                     {% endif %}
                 </div>
             </div>
-
             <div class="row my-5"></div>
-
             <div class="container">
                 <h3>댓글 ({% if comments %}{{ comments|length }}{% else %}{{ 0 }}{% endif %})</h3>
                     {% for comment in comments %}
