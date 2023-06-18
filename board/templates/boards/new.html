@@ -58,7 +58,7 @@
             event.preventDefault(); // 기본 동작인 폼의 서버 전송을 막습니다.
 
             const formData = new FormData(form);
-            formData.append('contents', editor.getMarkdown()); // TOAST-UI Editor의 내용을 폼 데이터에 추가합니다.
+            formData.append('contents', editor.getHTML()); // TOAST-UI Editor의 내용을 폼 데이터에 추가합니다.
 
             fetch(form.action, {
                 method: form.method,

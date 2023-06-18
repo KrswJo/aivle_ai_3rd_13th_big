@@ -2,6 +2,10 @@ from django.shortcuts import render,redirect, get_object_or_404
 from .models import Board,Comment
 from .forms import RegistForm,CommentForm
 from django.core.paginator import Paginator
+import logging
+
+
+logger = logging.getLogger('request_logger')
 
 def index(request):
     # 페이지 파라미터 얻기, 없으면 1
@@ -70,7 +74,8 @@ def delete(request, pk):
 
 def detail(request, pk):
     board_list = get_object_or_404(Board, pk=pk)
-    context = {'board_list': board_list}
+    comment_list = Comment.objects.filter(board=board_list)
+    context = {'board_list': board_list, "comments": comment_list}
     return render(request, 'boards/detail.html', context)
 
 def comments_create(request, pk):
@@ -80,7 +85,8 @@ def comments_create(request, pk):
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.board = board
-            comment.author = request.user
+            comment.nickname = request.user.nickname
+            comment.user_id = request.user.pk
             comment.save()
         return redirect('boards:detail', board.pk)
     return redirect('boards:new.html')
@@ -91,4 +97,4 @@ def comments_delete(request, pk, comment_pk):
         comment = get_object_or_404(Comment, pk=comment_pk)
         if request.user == comment.user:
             comment.delete()
-    return redirect('articles:detail', pk)
+    return redirect('boards:detail', pk)

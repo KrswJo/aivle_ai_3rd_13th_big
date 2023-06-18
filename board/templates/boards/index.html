@@ -1,56 +1,66 @@
+{% extends "base.html" %}
 {% load board_filter %}
-<html>
-<body>
-    <div class="row mt-5">
-            <div class="col-12">
-              <table class="table">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">제목</th>
-                    <th scope="col">닉네임</th>
-                    <th scope="col">최종수정일</th>
-                    <th scope="col">조회수</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for post in board_list %}
-                  <tr>
-                    <td>{{ board_list.paginator.count|sub:board_list.start_index|sub:forloop.counter0|add:1 }}</td>
-                    <td><a href="{% url 'boards:detail' post.id %}">{{post.title}}</a></td>
-                    <td>{{post.nickname}}</td>
-                    {% comment %} <td>{{post.content|truncatewords:5}}</td> {% endcomment %}
-                    <td>{{post.published_date|date:"Y-m-d"}}</td>
-                    <td>{{post.hit}}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              {% if user.is_authenticated %}
-                <a href="{%url 'boards:new' %}" class="btn btn-primary" >글쓰기</a> 
-              {% endif %}              
-            </div>
-        </div>
+{% load static %}
+{% block header %}{% endblock %}
+{% block content %}
+    <div class="container p-3"></div>
+    <div class="row my-5"></div>
 
-        <div class="row my-3">
-          <div class="col-md-12 text-center">
-              {% if board_list.has_previous %}
-                  <a href="?page=1">처음</a>
-                  <a href="?page={{ board_list.previous_page_number }}">이전</a>
-              {% endif %}
-                  <!-- 페이지리스트 -->
-                  <span style="color:red;font-weight:bold;">{{ board_list.number }}</span> 
-                  <span> / </span>
-                  <span style="font-weight:bold;">{{ board_list.paginator.num_pages }}</span>
-              {% if board_list.has_next %}
-                  <a href="?page={{ board_list.next_page_number }}">다음</a>
-                  <a href="?page={{ board_list.paginator.num_pages }}">끝</a>
-              {% endif %}            
-          </div>
+    <div class="container-xxl py-6 mt-5">
+        <div class="container">
+            <div class="row g-5 justify-content-center ">
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">닉네임</th>
+                                <th scope="col">게시일</th>
+                                <th scope="col">조회수</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for post in board_list %}
+                                <tr>
+                                    <td>{{ board_list.paginator.count|sub:board_list.start_index|sub:forloop.counter0|add:1 }}</td>
+                                    <td><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></td>
+                                    <td>{{ post.nickname }}</td>
+                                    {% comment %} <td>{{post.content|truncatewords:5}}</td> {% endcomment %}
+                                    <td>{{ post.created_date|date:"Y-m-d" }}</td>
+                                    <td>{{ post.hit }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                      {% if user.is_authenticated %}
+                        <a href="{%url 'boards:new' %}" class="btn btn-primary" >글쓰기</a> 
+                      {% endif %}  
+                    </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col-md-12 text-center">
+                        {% if board_list.has_previous %}
+                            <a href="?page=1">처음</a>
+                            <a href="?page={{ board_list.previous_page_number }}">이전</a>
+                        {% endif %}
+                        <!-- 페이지리스트 -->
+                        <span style="color:red;font-weight:bold;">{{ board_list.number }}</span>
+                        <span> / </span>
+                        <span style="font-weight:bold;">{{ board_list.paginator.num_pages }}</span>
+                        {% if board_list.has_next %}
+                            <a href="?page={{ board_list.next_page_number }}">다음</a>
+                            <a href="?page={{ board_list.paginator.num_pages }}">끝</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
-  </body>
-</html>
+    </div>
+{% endblock %}
+
