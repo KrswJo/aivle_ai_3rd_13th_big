@@ -16,25 +16,26 @@
         <div class="container">
             <div class="row g-5 justify-content-center ">
                 <div class="col-md-12">
-                    <h3>New Post</h3>
+                    <h3>새 글쓰기</h3>
                 </div>
             </div>
             <div class="row my-3"></div>
             <form action="{% url 'boards:create' %}" method="post">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label class="mb-2 text-muted" for="title">Title</label>
+                    <label class="mb-2 text-muted" for="title">제목</label>
                     <input id="signup_nickname" type="text" class="form-control" name="title"
-                           value="" required autofocus>
+                           value="" required autofocus placeholder="제목을 입력하세요">
                     </div>
                 <div class="mb-3">
-                    <label class="mb-2 text-muted" for="contents">Content</label>
-                    <div id="editor"></div>
+                    <label class="mb-2 text-muted" for="contents">내용</label>
+                    <div id="editor">
 {#                    <textarea id="contents" name="contents" style="display: none;"></textarea>#}
+                    </div>
                 </div>
 
                 <div style="padding: 5px 0px 5px 50px ; float:right;">
-                    <input class="btn btn-primary" type="submit" value="Post Registration">
+                    <input class="btn btn-primary" type="submit" value="글 등록하기">
                 </div>
             </form>
         </div>
@@ -50,6 +51,8 @@
             el: editorElement,
             initialEditType: 'wysiwyg', // WYSIWYG 모드로 시작합니다.
             previewStyle: 'vertical', // 미리보기 스타일을 수직 방향으로 설정합니다.
+            height: '500px',
+            placeholder: '내용을 입력하세요',
         });
 
         const form = document.querySelector('form');

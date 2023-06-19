@@ -38,7 +38,9 @@
                 <div class="row">
                     <div class="col-12">
                       {% if user.is_authenticated %}
+                        <div style="float:right;">
                         <a href="{%url 'boards:new' %}" class="btn btn-primary" >글쓰기</a> 
+                        </div>
                       {% endif %}  
                     </div>
                 </div>
