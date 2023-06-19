@@ -16,4 +16,3 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['contents']
-        #exclude = ('board', 'user',)
