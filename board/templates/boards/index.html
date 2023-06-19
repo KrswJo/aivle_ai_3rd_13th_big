@@ -27,7 +27,6 @@
                                     <td>{{ board_list.paginator.count|sub:board_list.start_index|sub:forloop.counter0|add:1 }}</td>
                                     <td><a href="{% url 'boards:detail' post.id %}">{{ post.title }}</a></td>
                                     <td>{{ post.nickname }}</td>
-                                    {% comment %} <td>{{post.content|truncatewords:5}}</td> {% endcomment %}
                                     <td>{{ post.created_date|date:"Y-m-d" }}</td>
                                     <td>{{ post.hit }}</td>
                                 </tr>

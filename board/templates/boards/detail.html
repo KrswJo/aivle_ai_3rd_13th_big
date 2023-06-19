@@ -54,7 +54,7 @@
                                             <i class="fa-solid fa-user"></i> &nbsp;{{ comment.user.nickname }} [작성자] 
 
                                             {% csrf_token %}
-                                            <input type="submit" class="float-end btn btn-danger" value="삭제">
+                                            <input type="submit" onclick="if(!confirm('정말 삭제하시겠습니까?')){return false;}" class="float-end btn btn-danger" value="삭제">
                                         </form>
                                     {% else %}
                                     <i class="fa-solid fa-user"></i> &nbsp;{{ comment.user.nickname }}
