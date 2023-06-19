@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load board_filter %}
 {% load static %}
 
 {% block header %}
@@ -19,7 +19,7 @@
         <div class="container">
             <div class="row g-5 justify-content-center ">
                 <div class="col-md-12">
-                    <h2>{{ board_list.title }}</h2>
+                    <h2>{{ board_list.title|custom_linebreaksbr:66 }}</h2>
                     <br>
                     <i class="fa-solid fa-user"></i>
                     {{board_list.nickname}}
