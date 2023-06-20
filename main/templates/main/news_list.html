@@ -17,7 +17,7 @@
                     <div class="bg-white text-center h-100 p-4 p-xl-5">
                         <img class="img-fluid mb-4 feature_img_size" src="{% static 'img/phone-camera.svg' %}" alt="" >
                         <h4 class="mb-3">사진찍고</h4>
-                        <p class="mb-4">사용자는 상품 사진을 찍어 시스템이 상품을 인식하고</p>
+                        <p class="mb-4">사용자는 상품들의 사진을 찍어 시스템이 상품을 인식하고</p>
                         <a class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href="">Read More</a>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                     <div class="bg-white text-center h-100 p-4 p-xl-5">
                         <img class="img-fluid mb-4 feature_img_size" src="{% static 'img/cart.svg' %}" alt="">
                         <h4 class="mb-3">장바구니에 담고</h4>
-                        <p class="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
+                        <p class="mb-4">시스템이 인식한 상품들을 장바구니에 넣고</p>
                         <a class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href="">Read More</a>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="bg-white text-center h-100 p-4 p-xl-5">
                         <img class="img-fluid mb-4 feature_img_size" src="{% static 'img/credict-phone.svg' %}" alt="">
                         <h4 class="mb-3">결제하고</h4>
-                        <p class="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
+                        <p class="mb-4">장바구니에 넣은 상품들을 결제하고 바로 나가기만 하면 됩니다!</p>
                         <a class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href="">Read More</a>
                     </div>
                 </div>
@@ -50,6 +50,8 @@
             </div>
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
                 {% for p in board_list|slice:":5" %}
+
+                <a href="{% url 'boards:detail' p.id %}">
                     <div class="testimonial-item position-relative bg-white p-5 mt-4">
                         <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
                         <p class="mb-4">{{p.contents|striptags|custom_linebreaksbr:35}}</p>
@@ -62,6 +64,7 @@
                             </div>
                         </div>
                     </div>
+                </a>
                 {% endfor %}
             </div>
         </div>
