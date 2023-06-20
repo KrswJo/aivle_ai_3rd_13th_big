@@ -114,3 +114,8 @@ def test(request):
 
 def upload(request):
     return render(request, 'payment/result.html')
+    return render(request, 'languagechat/result.html', context)
+
+
+def prototype(request):
+    return render(request, 'payment/prototype.html')
