@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}
+    <link href="{% static 'css/test.css' %}" rel="stylesheet">
+    <script src="{% static 'js/test.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+    <div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2 text-center">
+                    <!-- 가운데 정렬을 원하는 내용 -->
+                    <h2 class="title">File Upload</h2>
+                    <hr>
+                    <div class="contents">
+                        <div class="upload-box">
+                            <div class="drag-file" id="drop-file">
+                                <img alt="파일 아이콘" class="image"
+                                     src="https://img.icons8.com/pastel-glyph/2x/image-file.png">
+                                <p class="message">Drag files to upload</p>
+                            </div>
+                            <label class="file-label" for="chooseFile">Choose File</label>
+                            <input class="file" id="chooseFile" multiple onchange="dropFile.handleFiles(this.files)"
+                                   type="file">
+                        </div>
+                        <div class="files" id="files">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const dropFile = new DropFile("drop-file", "files");
+    </script>
+{% endblock %}

@@ -2,40 +2,42 @@
 {% load static %}
 {% block header %}
     <!-- CSS 파일 -->
-    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css" />
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css"/>
     <!-- JavaScript 파일 -->
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <script src="{% static 'js/board.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-
-    <div class="container p-3"></div>
-    <div class="container-xxl py-6 mt-5">
+    <div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
         <div class="container">
-            <div class="row g-5 justify-content-center ">
-                <div class="col-md-12">
-                    <h3>글 수정하기</h3>
-                </div>
-            </div>
-            <div class="row my-3"></div>
-            <form action="" method="post">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label class="mb-2 text-muted" for="title">제목</label>
-                    <input id="signup_nickname" type="text" class="form-control" name="title"
-                           value="{{ form.title.value }}" required autofocus >
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row my-3"></div>
+                    <div class="row">
+                        <h4>글 수정하기</h4>
                     </div>
-                <div class="mb-3">
-                    <label class="mb-2 text-muted" for="contents">내용</label>
-                    <div id="editor" style="height: 500px;"></div>
-                    <textarea id="contents" name="contents" style="display: none;"></textarea>
+                    <!-- 가운데 정렬을 원하는 내용 -->
                 </div>
+                <div class="row my-3"></div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="mb-2 text-muted" for="title">제목</label>
+                        <input id="signup_nickname" type="text" class="form-control" name="title"
+                               value="{{ form.title.value }}" required autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <label class="mb-2 text-muted" for="contents">내용</label>
+                        <div id="editor" style="height: 500px;"></div>
+                        <textarea id="contents" name="contents" style="display: none;"></textarea>
+                    </div>
 
-                <div style="padding: 5px 0px 5px 50px ; float:right;">
-                    <input class="btn btn-primary" type="submit" value="글 수정하기">
-                </div>
-            </form>
+                    <div style="padding: 5px 0px 5px 50px ; float:right;">
+                        <input class="btn btn-primary" type="submit" value="글 수정하기">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -71,17 +73,18 @@
 
 
             fetch(form.action, {
-               method: form.method,
-               body: formData})
-               .then(response => response.json())
-               .then(data => {
-                   // 서버 응답에 대한 처리를 수행합니다.
-                   location.replace({% url 'boards:index' %});
-               })
-               .catch(error => {
-                   // 오류 처리를 수행합니다.
-                   location.replace({% url 'boards:index' %});
-               });
+                method: form.method,
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // 서버 응답에 대한 처리를 수행합니다.
+                    location.replace({% url 'boards:index' %});
+                })
+                .catch(error => {
+                    // 오류 처리를 수행합니다.
+                    location.replace({% url 'boards:index' %});
+                });
         });
     </script>
 {% endblock %}

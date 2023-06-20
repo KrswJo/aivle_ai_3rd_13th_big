@@ -107,4 +107,8 @@ def result(request):
         'result': selectedChatResult.content
     }
 
-    return render(request, 'languagechat/result.html', context)  
+    return render(request, 'languagechat/result.html', context)
+
+
+def prototype(request):
+    return render(request, 'payment/prototype.html')
