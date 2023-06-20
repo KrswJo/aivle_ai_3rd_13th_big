@@ -111,3 +111,6 @@ def result(request):
 
 def test(request):
     return render(request, 'payment/result.html')
+
+def upload(request):
+    return render(request, 'payment/result.html')
