@@ -34,46 +34,45 @@ def result(request):
         files = request.FILES.getlist('files')
         chatGptPrompt = ""
         for idx,file in enumerate(files, start=0):
-                # files:
+            #######MLflow에서 모델 로딩 후 이미 전처리하여 예측한 결과 텍스트를 변수에 저장##########
+            # # logger.error('file', file)
+            # # class names 준비
+            # class_names = list(string.ascii_lowercase)
+            # class_names = np.array(class_names)
 
-            # logger.error('file', file)
-            # class names 준비
-            class_names = list(string.ascii_lowercase)
-            class_names = np.array(class_names)
-
-
-            # mlflow 로딩
-            mlflow_uri="http://mini7-mlflow.carpediem.so/"
-            mlflow.set_tracking_uri(mlflow_uri)
-            model_uri = "models:/Sign_Signal/production"
-            model = mlflow.keras.load_model(model_uri)
-
-
-            # history 저장을 위해 객체에 담아서 DB에 저장한다.
-            # 이때 파일시스템에 저장도 된다.
-            result = Result()
-            result.image = file
-            result.pub_date = timezone.datetime.now()
-            result.save()
+            
+            # # mlflow 로딩
+            # mlflow_uri="http://mini7-mlflow.carpediem.so/"
+            # mlflow.set_tracking_uri(mlflow_uri)
+            # model_uri = "models:/Sign_Signal/production"
+            # model = mlflow.keras.load_model(model_uri)
 
 
-            # 흑백으로 읽기
-            img = cv2.imread(result.image.path, cv2.IMREAD_GRAYSCALE)
+            # # history 저장을 위해 객체에 담아서 DB에 저장한다.
+            # # 이때 파일시스템에 저장도 된다.
+            # result = Result()
+            # result.image = file
+            # result.pub_date = timezone.datetime.now()
+            # result.save()
 
-            # 크기 조정
-            img = cv2.resize(img, (28, 28))
 
-            # input shape 맞추기
-            test_sign = img.reshape(1, 28, 28, 1)
+            # # 흑백으로 읽기
+            # img = cv2.imread(result.image.path, cv2.IMREAD_GRAYSCALE)
 
-            # 스케일링
-            test_sign = test_sign / 255.
+            # # 크기 조정
+            # img = cv2.resize(img, (28, 28))
 
-            # 예측 : 결국 이 결과를 얻기 위해 모든 것을 했다.
-            pred = model.predict(test_sign)
-            pred_1 = pred.argmax(axis=1)
+            # # input shape 맞추기
+            # test_sign = img.reshape(1, 28, 28, 1)
 
-            result_str = class_names[pred_1][0]
+            # # 스케일링
+            # test_sign = test_sign / 255.
+
+            # # 예측 : 결국 이 결과를 얻기 위해 모든 것을 했다.
+            # pred = model.predict(test_sign)
+            # pred_1 = pred.argmax(axis=1)
+
+            # result_str = class_names[pred_1][0]
 
 
             #결과를 DB에 저장한다.
@@ -107,4 +106,8 @@ def result(request):
         'result': selectedChatResult.content
     }
 
-    return render(request, 'languagechat/result.html', context)  
+    return render(request, 'payment/result.html', context)  
+
+
+def test(request):
+    return render(request, 'payment/result.html')
