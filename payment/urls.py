@@ -5,5 +5,6 @@ from . import views
 app_name = 'payment'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('result', views.result, name='result'),
+    #path('result', views.result, name='result'),
+    path('test/', views.test, name='test'),
 ]
