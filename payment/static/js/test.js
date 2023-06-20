@@ -43,24 +43,51 @@ function DropFile(dropAreaId, fileListId) {
   function renderFile(file) {
     let fileDOM = document.createElement("div");
     fileDOM.className = "file";
-    fileDOM.innerHTML = `
-      <div class="thumbnail">
-        <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일타입 이미지" class="image">
-      </div>
-      <div class="details">
-        <header class="header">
-          <span class="name">${file.name}</span>
-          <span class="size">${file.size} byte</span>
-        </header>
-        <div class="progress">
-          <div class="bar"></div>
-        </div>
-        <div class="status">
-          <span class="percent">100%</span>
-          <span class="speed">Complete</span>
-        </div>
-      </div>
-    `;
+
+    let thumbnail = document.createElement("div");
+    thumbnail.className = "thumbnail";
+    let img = document.createElement("img");
+    img.src = URL.createObjectURL(file); // Use uploaded image file as thumbnail
+    img.alt = "파일타입 이미지";
+    img.className = "image";
+    thumbnail.appendChild(img);
+    fileDOM.appendChild(thumbnail);
+
+    let details = document.createElement("div");
+    details.className = "details";
+    let header = document.createElement("header");
+    header.className = "header";
+    let name = document.createElement("span");
+    name.className = "name";
+    name.textContent = file.name;
+    let size = document.createElement("span");
+    size.className = "size";
+    size.textContent = file.size + " byte";
+    header.appendChild(name);
+    header.appendChild(size);
+    details.appendChild(header);
+
+    let progress = document.createElement("div");
+    progress.className = "progress";
+    let bar = document.createElement("div");
+    bar.className = "bar";
+    progress.appendChild(bar);
+    details.appendChild(progress);
+
+    let status = document.createElement("div");
+    status.className = "status";
+    let percent = document.createElement("span");
+    percent.className = "percent";
+    percent.textContent = "100%";
+    let speed = document.createElement("span");
+    speed.className = "speed";
+    speed.textContent = "Complete";
+    status.appendChild(percent);
+    status.appendChild(speed);
+    details.appendChild(status);
+
+    fileDOM.appendChild(details);
+
     return fileDOM;
   }
 
