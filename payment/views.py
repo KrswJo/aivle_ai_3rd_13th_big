@@ -5,6 +5,7 @@ from django.conf import settings
 from django.core.files.storage import default_storage
 import numpy as np
 import cv2
+import os
 import string
 import mlflow
 import mlflow.keras
@@ -117,4 +118,37 @@ def upload(request):
 
 
 def prototype(request):
+    return render(request, 'payment/prototype.html')
+
+def capture_image(request):
+    # 웹캠 영상 캡처
+    video_capture = cv2.VideoCapture(0)
+    
+    if not video_capture.isOpened():
+        print = "camera open failed"
+    while True:
+        ret, img = video_capture.read()
+        if not ret:
+            print = "Can't read camera"
+            break
+        
+        # 이미지 저장 경로 설정
+        #image_path = os.path.join(settings.MEDIA_ROOT)
+        #image_path = os.path.join(settings.MEDIA_ROOT, 'captured_images', 'captured_image.jpg')
+        
+        cv2.imshow('PC_camera', img)
+        if cv2.waitKey(1) == ord('c'):
+            img_captured = cv2.imwrite(image_path, img)
+        if cv2.waitKey(1) == ord('q'):
+            break
+
+    video_capture.release()
+    cv2.destroyAllWindows()
+
+
+
+    # # # 캡처된 이미지의 URL 생성
+    #image_url = os.path.join(settings.MEDIA_URL, 'captured_images', 'captured_image.jpg')
+
+    # 캡처된 이미지의 URL을 JSON 형태로 반환
     return render(request, 'payment/prototype.html')
