@@ -35,7 +35,7 @@
 ## 주요 서비스 화면
 
 ## Service Flow
-
+![코스트코](https://github.com/KrswJo/aivle_ai_3rd_13th_big/assets/50902999/10bb62d2-7979-4099-a7df-dd12f24672a5)
 ## 서비스 사용 방법
 
 ## 서비스 설치 방법
