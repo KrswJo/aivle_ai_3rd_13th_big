@@ -17,6 +17,7 @@
 6. [서비스 설치 방법](#서비스-설치-방법)    
 
 ## 조원소개
+AI 수도권 4반 13조
 <details><summary>Backend
 </summary>
 
