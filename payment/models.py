@@ -14,3 +14,7 @@ class PaymentResult(models.Model):
     prompt = models.CharField(max_length=1000)
     content = models.TextField()
     pub_date = models.DateTimeField('date published')
+    
+# class CameraImage(models.Model):
+#     image = models.ImageField(upload_to="static/img/")
+#     timestamp = models.DateTimeField(auto_now_add=True)
