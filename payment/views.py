@@ -12,6 +12,7 @@ import mlflow.keras
 logger = logging.getLogger('mylogger')
 #signlanguage/models.py의 Result 모델을 import한다.
 from .models import PaymentResult, Result
+from .apps import object_detection
 # Create your views here.
 
 '''
@@ -75,38 +76,40 @@ def result(request):
             # result_str = class_names[pred_1][0]
 
 
-            #결과를 DB에 저장한다.
-            result.result = result_str
-            # result.is_correct = 
-            result.save()
-            results.append(result)
+            object_detection(request,file)
 
-            #result.result의 결과를 하나씩 chatGptPrompt에 추가한다.
-            chatGptPrompt += result.result
+            # #결과를 DB에 저장한다.
+            # result.result = result_str
+            # # result.is_correct = 
+            # result.save()
+            # results.append(result)
+
+            # #result.result의 결과를 하나씩 chatGptPrompt에 추가한다.
+            # chatGptPrompt += result.result
         
-        #질문을 DB에 저장한다.
-        chatResult = ChatResult()
-        chatResult.prompt = chatGptPrompt
-        chatResult.pub_date = timezone.datetime.now()
-        chatResult.save()
+    #     #질문을 DB에 저장한다.
+    #     chatResult = ChatResult()
+    #     chatResult.prompt = chatGptPrompt
+    #     chatResult.pub_date = timezone.datetime.now()
+    #     chatResult.save()
 
 
-        #저장된 질문을 DB에서 가져온다.
-        selectedChatResult = ChatResult.objects.get(id=chatResult.id)
+    #     #저장된 질문을 DB에서 가져온다.
+    #     selectedChatResult = ChatResult.objects.get(id=chatResult.id)
 
-        #chatGptPrompt를 chatGPT에게 전달한다.
-        content = chatGPT(selectedChatResult.prompt)
-        selectedChatResult.content = content
-        selectedChatResult.save()
+    #     #chatGptPrompt를 chatGPT에게 전달한다.
+    #     content = chatGPT(selectedChatResult.prompt)
+    #     selectedChatResult.content = content
+    #     selectedChatResult.save()
         
      
 
-        context = {
-        'question': selectedChatResult.prompt,
-        'result': selectedChatResult.content
-    }
+    #     context = {
+    #     'question': selectedChatResult.prompt,
+    #     'result': selectedChatResult.content
+    # }
 
-    return render(request, 'payment/result.html', context)  
+    return render(request, 'payment/result.html')  
 
 
 def test(request):
