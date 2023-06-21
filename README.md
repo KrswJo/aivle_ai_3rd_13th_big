@@ -55,6 +55,53 @@ AI 수도권 4반 13조
 </details>
 
 ## 주요 서비스 화면
+<details><summary>메인 페이지
+</summary>
+
+![메인](https://github.com/KrswJo/aivle_ai_3rd_13th_big/assets/50902999/3844667e-bf81-43b4-857d-1983f19ea536)
+</details>
+
+<details><summary>로그인 페이지
+</summary>
+
+![로그인](https://github.com/KrswJo/aivle_ai_3rd_13th_big/assets/50902999/466f708b-491b-454b-84f0-4f23d41fd5d7)
+</details>
+
+<details><summary>회원가입 페이지
+</summary>
+
+![회원가입](https://github.com/KrswJo/aivle_ai_3rd_13th_big/assets/50902999/878d3547-a8ff-405c-b4cb-3ec4eb17415c)
+</details>
+
+<details><summary>비밀번호 찾기 페이지
+</summary>
+
+![비밀번호찾기](https://github.com/KrswJo/aivle_ai_3rd_13th_big/assets/50902999/424933b5-72b2-4e6b-9692-33f7f7fcbb8a)
+</details>
+
+<details><summary>게시판 글쓰기 페이지
+</summary>
+
+![새글쓰기](https://github.com/KrswJo/aivle_ai_3rd_13th_big/assets/50902999/9332609c-3d11-44eb-9e0d-70dd1fbb447a)
+</details>
+
+<details><summary>게시판 글목록 페이지
+</summary>
+
+![글목록](https://github.com/KrswJo/aivle_ai_3rd_13th_big/assets/50902999/2c061c7f-d7c1-4b64-9b42-6b0afee82743)
+</details>
+
+<details><summary>게시판 글세부 페이지
+</summary>
+
+![글 디테일](https://github.com/KrswJo/aivle_ai_3rd_13th_big/assets/50902999/4d35da4d-6785-4e4a-8d58-c076d2ebb267)
+</details>
+
+<details><summary>게시판 글수정 페이지
+</summary>
+
+![글 수정](https://github.com/KrswJo/aivle_ai_3rd_13th_big/assets/50902999/b50f02aa-c1fc-42d0-a68c-574e1d392457)
+</details>
 
 ## Service Flow
 ![코스트코](https://github.com/KrswJo/aivle_ai_3rd_13th_big/assets/50902999/10bb62d2-7979-4099-a7df-dd12f24672a5)
@@ -62,5 +109,4 @@ AI 수도권 4반 13조
 
 ## 서비스 설치 방법
 
-## 서비스 설치 방법
 
