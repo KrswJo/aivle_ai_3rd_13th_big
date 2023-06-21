@@ -20,10 +20,10 @@
             <div class="row g-5 justify-content-center ">
                 <div class="col-md-12">
                     <h2>{{ board_list.title|custom_linebreaksbr:66 }}</h2>
-                    <br>
                     <i class="fa-solid fa-user"></i>
                     {{board_list.nickname}}
                     <p><small style="color:silver;text-align:right;">{{ board_list.created_date|date:"Y.m.d H:i" }}</small></p>
+                    <hr class="mt-sm-0">
                 </div>
             </div>
             <div id="editor"></div>
@@ -43,8 +43,9 @@
             </div>
             <div class="row my-5"></div>
             <div class="container">
-                <h3>댓글 ({% if comments %}{{ comments|length }}{% else %}{{ 0 }}{% endif %})</h3>
-                    {% for comment in comments %}
+                <h3><i class="fa-regular fa-comment-dots fa-lg"></i> 댓글 ({% if comments %}{{ comments|length }}{% else %}{{ 0 }}{% endif %})</h3>
+                <hr>    
+                {% for comment in comments %}
                         <div class="card mb-2">
                             <div class="card-header bg-body">
                                 <div>
@@ -93,7 +94,6 @@
     <script>
         // 에디터 컨테이너 요소를 가져옵니다.
         let contents = "{{ board_list.contents }}";
-
         convertedContents = parseContents(contents);
         setContents("#editor", convertedContents);
     </script>
