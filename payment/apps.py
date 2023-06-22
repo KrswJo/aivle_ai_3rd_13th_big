@@ -11,7 +11,12 @@ STR_BASE_DIR = str(BASE_DIR)
 def object_detection(request,file):
     
     image = Image.open(file)
+<<<<<<< HEAD
     image.save("./detect_products/Products.jpg","JPEG")
+=======
+    image.convert('RGB')
+    image.save("./media/Products.jpg","JPEG")
+>>>>>>> 083a4dbd4a4acaccae38421349ff6e4556af2ac9
 
     
     cmd = "python " + STR_BASE_DIR + "/yolov5/detect.py --weights " + STR_BASE_DIR + "/yolov5/pretrained_weights/yolov5m_costco10.pt --img 640 --conf 0.25 --img 640 --conf 0.25 --source " + STR_BASE_DIR + "/detect_products/Products.jpg --save-txt"
