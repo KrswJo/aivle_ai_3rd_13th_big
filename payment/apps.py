@@ -10,6 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 def object_detection(request,file):
     
     image = Image.open(file)
+    image.convert('RGB')
     image.save("./media/Products.jpg","JPEG")
 
     STR_BASE_DIR = str(BASE_DIR)
