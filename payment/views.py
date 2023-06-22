@@ -77,7 +77,15 @@ def result(request):
 
 
             object_detection(request,file)
-
+            with open('./detect_products/exp/labels/Products.txt', 'r') as file:
+                lines = file.readlines()  # 파일의 모든 줄을 읽어옴
+                if lines[0] != 'NO_DETECT':
+                    for line in lines:
+                        product_id = int(line.strip().split()[0])
+                        print(product_id,'번 상품을 샀어요') # 프린트대신 영수증 db에 넣기
+                else:
+                    print('왜 아무것도 안사요')
+                    
             # #결과를 DB에 저장한다.
             # result.result = result_str
             # # result.is_correct = 
