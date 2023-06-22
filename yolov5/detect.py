@@ -169,10 +169,6 @@ def run(
                         if len(line):
                             with open(f'{txt_path}.txt', 'w') as f:
                                 f.write(('%g ' * len(line)).rstrip() % line + '\n')
-                                f.write(str(len(line)))
-                        else:
-                            with open(f'{txt_path}.txt', 'w') as f:
-                                f.write('NO_DETECT')
 
                     if save_img or save_crop or view_img:  # Add bbox to image
                         c = int(cls)  # integer class
@@ -181,6 +177,9 @@ def run(
                     if save_crop:
                         save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
+            else:
+                with open(f'{txt_path}.txt', 'w') as f:
+                    f.write('NO_DETECT')
             # Stream results
             im0 = annotator.result()
             if view_img:
