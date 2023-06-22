@@ -17,9 +17,9 @@ def object_detection(request,file):
     cmd = "python " + STR_BASE_DIR + "/yolov5/detect.py --weights " + STR_BASE_DIR + "/yolov5/pretrained_weights/yolov5m_costco10.pt --img 640 --conf 0.25 --img 640 --conf 0.25 --source " + STR_BASE_DIR + "/media/Products.jpg"
     subprocess.run(cmd, shell=True)
 
-    # context = {'image': image}
-    # return render(request, 'payment/result.html', context)
-    return render(request, '/payment/result.html')
+    context = {'image': image}
+    return render(request, 'payment/result.html', context)
+    #return render(request, '/payment/result.html')
 
 
 class PaymentConfig(AppConfig):
