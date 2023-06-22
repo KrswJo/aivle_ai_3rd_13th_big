@@ -20,7 +20,7 @@ def object_detection(request,file):
 
     # context = {'image': image}
     # return render(request, 'payment/result.html', context)
-    return render(request, '/payment/result.html')
+    return render(request, 'payment/result.html')
 
 
 class PaymentConfig(AppConfig):
