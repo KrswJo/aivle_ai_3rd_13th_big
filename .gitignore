@@ -4,4 +4,4 @@ __pycache__
 db.sqlite3
 static/img
 */migrations/*
-*/detect_products/*
+detect_products/
