@@ -6,6 +6,7 @@
 {% block content %}
 <script>
     let idNum = 0;
+
     function addFile(){
         deepCopy();
     }
@@ -13,8 +14,6 @@
     function deepCopy()  {
       // 'test' node 선택
       const fileModule = document.getElementById('file-module-'+idNum);
-
-
 
       // 노드 복사하기 (deep copy)
       const newNode = fileModule.cloneNode(true);
@@ -28,6 +27,17 @@
       // 복사한 노드 붙여넣기
       fileModule.after(newNode);
     }
+
+    function ufilecheck(f){
+        var v = document.getElementById("ufile").value;
+        if("" === v){
+            alert("파일을 첨부해 주세요");
+            return False;
+        }    
+
+        f.submit();
+        return True;
+    }    
 </script>
 <div class="container p-3"></div>
     <div class="container-xxl py-6 mt-5">
@@ -40,17 +50,17 @@
         
                                 <div class="card shadow-lg">
                                     <div class="card-body p-5">
-                                <form action="result" method="post" enctype="multipart/form-data">
+                                <form action="result/" method="post" enctype="multipart/form-data">
             {% csrf_token %}
                 <span id="file-module-0">
                     <fieldset>
                         <legend><h1 class="fs-4 card-title fw-bold mb-2">파일 업로드</h1></legend>
-                        <input name="files" type="file">
+                        <input name="files" type="file" id='ufile'>
 
                     </fieldset>
                 </span>
     <button onclick="addFile()" type="button" class="btn btn-primary ms-auto">파일 추가 </button>
-    <div><input type="submit" value="결제" class="btn btn-primary ms-auto"></div>
+    <div><input type="button" onclick="ufilecheck(this.form);" value="결제" class="btn btn-primary ms-auto"></div>
 </form>
 </div>
 </div>
