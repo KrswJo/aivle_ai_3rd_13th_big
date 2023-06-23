@@ -4,8 +4,8 @@ import platform
 import sys
 from pathlib import Path
 from pathlib import Path
-import logging
-logging.getLogger('yolov5').setLevel(logging.CRITICAL)
+import warnings
+warnings.filterwarnings("ignore")
 
 BASE_DIR = str(Path(__file__).resolve().parent.parent)
 import torch
