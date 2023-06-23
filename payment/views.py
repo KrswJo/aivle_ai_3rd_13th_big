@@ -86,6 +86,7 @@ def result(request):
             
             
             purchased_products = dict()
+            products_weights = 0
             with open('./detect_products/exp/labels/Products.txt', 'r') as file:
                 lines = file.readlines()  # 파일의 모든 줄을 읽어옴
                 if lines[0] != 'NO_DETECT':
@@ -94,6 +95,7 @@ def result(request):
                         product = CostcoPrice.objects.get(idx=product_id)
                         product_name = product.names
                         product_price = product.price
+                        products_weights += product.weight
                         # product_weight = product.weight
                         if product_name in purchased_products:
                             purchased_products[product_name][0] += 1
@@ -103,7 +105,7 @@ def result(request):
                             
                     for purchased_product in purchased_products:
                         print(purchased_product,'    개수:',purchased_products[purchased_product][0],'  가격:',purchased_products[purchased_product][1])
-                    
+                    print('총무게:',products_weights)
                 else:
                     print('왜 아무것도 안사요 ㅡ,ㅡ')
                     
