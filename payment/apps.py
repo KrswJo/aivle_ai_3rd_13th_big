@@ -11,7 +11,6 @@ STR_BASE_DIR = str(BASE_DIR)
 def object_detection(request,file):
     
     image = Image.open(file)
-    image.save("./detect_products/Products.jpg","JPEG")
     image.convert('RGB')
     image.save("./detect_products/Products.jpg","JPEG")
 
