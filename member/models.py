@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
-
+import re
 
 def validate_card_validity_period(value):
     # 입력된 값이 YYYY MM 형식인지 확인
