@@ -83,6 +83,9 @@ def result(request):
             # for cp in costco_price:
                 # print(cp.idx, cp.names)
             
+            
+            
+            purchased_products = dict()
             with open('./detect_products/exp/labels/Products.txt', 'r') as file:
                 lines = file.readlines()  # 파일의 모든 줄을 읽어옴
                 if lines[0] != 'NO_DETECT':
@@ -91,7 +94,16 @@ def result(request):
                         product = CostcoPrice.objects.get(idx=product_id)
                         product_name = product.names
                         product_price = product.price
-                        print(product_name,str(product_price)+'원') # 프린트대신 영수증 db에 넣기
+                        # product_weight = product.weight
+                        if product_name in purchased_products:
+                            purchased_products[product_name][0] += 1
+                            purchased_products[product_name][1] += product_price
+                        else:
+                            purchased_products[product_name] = [1,product_price]
+                            
+                    for purchased_product in purchased_products:
+                        print(purchased_product,'    개수:',purchased_products[purchased_product][0],'  가격:',purchased_products[purchased_product][1])
+                    
                 else:
                     print('왜 아무것도 안사요 ㅡ,ㅡ')
                     
