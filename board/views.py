@@ -3,6 +3,7 @@ from .models import Board,Comment
 from .forms import RegistForm,CommentForm
 from django.core.paginator import Paginator
 import logging
+from django.contrib.auth.decorators import login_required
 
 
 logger = logging.getLogger('request_logger')
@@ -20,7 +21,7 @@ def index(request):
     context = {'board_list': page_obj}
     return render(request, 'boards/index.html', context)
 
-
+@login_required
 def new(request):
     if request.method == 'POST':
         form = RegistForm(request.POST)
@@ -34,6 +35,7 @@ def new(request):
     context = {'form': form,}
     return render(request, 'boards/new.html', context)
 
+@login_required
 def create(request):
     if request.method == "POST":
         title = request.POST.get('title')
@@ -43,6 +45,7 @@ def create(request):
         Board.objects.create(title=title, author=author, contents=contents, nickname = nickname)
         return redirect('boards:index')
 
+@login_required
 def edit(request, pk):
     post = get_object_or_404(Board, pk=pk)
     if request.user == post.author:
@@ -62,6 +65,7 @@ def edit(request, pk):
     return render(request, 'boards/edit.html', context)
 
 
+@login_required
 def delete(request, pk):
     post = get_object_or_404(Board, id=pk)
     if request.user.is_authenticated:
@@ -78,6 +82,7 @@ def detail(request, pk):
     context = {'board_list': board_list, "comments": comment_list}
     return render(request, 'boards/detail.html', context)
 
+@login_required
 def comments_create(request, pk):
     if request.user.is_authenticated:
         board = get_object_or_404(Board, pk=pk)
@@ -92,9 +97,10 @@ def comments_create(request, pk):
     return redirect('boards:new.html')
 
 
+@login_required
 def comments_delete(request, pk, comment_pk):
     if request.user.is_authenticated:
         comment = get_object_or_404(Comment, pk=comment_pk)
         if request.user == comment.user:
             comment.delete()
-    return redirect('boards:detail', pk)
+    return redirect('boards:detail', pk)    
