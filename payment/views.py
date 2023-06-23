@@ -106,7 +106,7 @@ def result(request):
                     for purchased_product in purchased_products:
                         print(purchased_product,'\t\t\t개수:',purchased_products[purchased_product][0],'\t\t\t가격:',purchased_products[purchased_product][1])
                     print('총가격:',purchased_products_price)
-                    print('총무게:',purchased_products_weights)
+                    print('총무게(g):',purchased_products_weights)
                 else:
                     print('왜 아무것도 안사요 ㅡ,ㅡ')
                     
