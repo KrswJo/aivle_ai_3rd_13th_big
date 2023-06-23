@@ -2,7 +2,7 @@ import pandas as pd
 import mysql.connector
 
 
-csv_data = pd.read_csv('costco_price.csv', na_values=[''])  # 엑셀 파일 읽기
+csv_data = pd.read_csv('costco_price.csv', delimiter='\t', na_values=[''])  # 엑셀 파일 읽기
 
 cnx = mysql.connector.connect(
     host='localhost',
@@ -21,7 +21,8 @@ create_table_sql = '''
 CREATE TABLE costco_price (
     idx INT AUTO_INCREMENT PRIMARY KEY,
     names VARCHAR(255),
-    price INT
+    price INT,
+    weight INT
 );
 '''
 
@@ -30,14 +31,14 @@ cursor.execute(create_table_sql)
 
 # 데이터 삽입 SQL 및 실행
 insert_data_sql = '''
-INSERT INTO costco_price (names, price)
-VALUES (%s, %s);
+INSERT INTO costco_price (names, price, weight)
+VALUES (%s, %s, %s);
 '''
 
 
 for index, row in csv_data.iterrows():
     if pd.notna(row['names']) and pd.notna(row['price']):
-        data = (row['names'], row['price'])
+        data = (row['names'], row['price'], row['weight'])
         cursor.execute(insert_data_sql, data)
     
     
