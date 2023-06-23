@@ -21,12 +21,12 @@ AI 수도권 4반 13조
 <details><summary>Backend
 </summary>
 
-*신동화, 정광근, 정인환*
+*신동화, 정광근(조장), 정인환*
 </details>
 <details><summary>Frontend
 </summary>
 
-*조승우(조장), 장지해*
+*조승우, 장지해*
 </details>
 <details><summary>AI
 </summary>
