@@ -90,9 +90,10 @@ def result(request):
                         product_id = int(line.strip().split()[0]) + 1
                         product = CostcoPrice.objects.get(idx=product_id)
                         product_name = product.names
-                        print(product_name,'번 상품을 샀어요') # 프린트대신 영수증 db에 넣기
+                        product_price = product.price
+                        print(product_name,str(product_price)+'원') # 프린트대신 영수증 db에 넣기
                 else:
-                    print('왜 아무것도 안사요')
+                    print('왜 아무것도 안사요 ㅡ,ㅡ')
                     
 
                     
