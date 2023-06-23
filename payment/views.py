@@ -11,7 +11,7 @@ import mlflow.keras
 # from chatgpt.views import chatGPT
 logger = logging.getLogger('mylogger')
 #signlanguage/models.py의 Result 모델을 import한다.
-from .models import PaymentResult, Result
+from .models import PaymentResult, Result, CostcoPrice
 from .apps import object_detection
 # Create your views here.
 
@@ -25,6 +25,9 @@ from .apps import object_detection
 
 def index(request):
     return render(request, 'payment/index.html')
+
+
+
 
 def result(request):
     if request.method == 'POST' and request.FILES['files']:
@@ -77,7 +80,22 @@ def result(request):
 
 
             object_detection(request,file)
+            # for cp in costco_price:
+                # print(cp.idx, cp.names)
+            
+            with open('./detect_products/exp/labels/Products.txt', 'r') as file:
+                lines = file.readlines()  # 파일의 모든 줄을 읽어옴
+                if lines[0] != 'NO_DETECT':
+                    for line in lines:
+                        product_id = int(line.strip().split()[0]) + 1
+                        product = CostcoPrice.objects.get(idx=product_id)
+                        product_name = product.names
+                        print(product_name,'번 상품을 샀어요') # 프린트대신 영수증 db에 넣기
+                else:
+                    print('왜 아무것도 안사요')
+                    
 
+                    
             # #결과를 DB에 저장한다.
             # result.result = result_str
             # # result.is_correct = 
@@ -113,4 +131,7 @@ def result(request):
 
 
 def test(request):
+
+        
+        
     return render(request, 'payment/result.html')

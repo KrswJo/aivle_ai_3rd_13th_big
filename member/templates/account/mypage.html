@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header %} {% endblock %}
+{% block content %}
+    <div class="d-flex align-items-center justify-content-center" style="height: 120vh;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 offset-md-4">
+                    <!-- 가운데 정렬을 원하는 내용 -->
+                    <div class="card shadow-lg">
+                        <div class="card-body p-5">
+                            <h1 class="fs-4 card-title fw-bold mb-2">내정보</h1>
+                            <div class="mb-3">
+                                <label class="mb-2 text-muted">이메일</label>
+                                <label class="mb-2 text-muted">{{current_user.email}}</label>
+                                
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+    
+    </script>
+{% endblock %}
