@@ -19,4 +19,4 @@ ultralytics>=8.0.111
 pandas>=1.1.4
 seaborn>=0.11.0
 setuptools>=65.5.1
-mysql-connector-python
+mysql-connector-python==8.0.33

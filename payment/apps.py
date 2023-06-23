@@ -18,6 +18,7 @@ def object_detection(request,file):
     subprocess.run(cmd, shell=True)
 
 
+
 class PaymentConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "payment"
