@@ -11,7 +11,7 @@ import mlflow.keras
 # from chatgpt.views import chatGPT
 logger = logging.getLogger('mylogger')
 #signlanguage/models.py의 Result 모델을 import한다.
-from .models import PaymentResult, Result, CostcoPrice
+from .models import PaymentResult, Result, CostcoPrice, receipt
 from .apps import object_detection
 # Create your views here.
 
@@ -90,6 +90,7 @@ def result(request):
             with open('./detect_products/exp/labels/Products.txt', 'r') as file:
                 lines = file.readlines()  # 파일의 모든 줄을 읽어옴
                 if lines[0] != 'NO_DETECT':
+                    #Order.objects.create(member = request.user)
                     for line in lines:
                         product_id = int(line.strip().split()[0]) + 1
                         product = CostcoPrice.objects.get(idx=product_id)
@@ -105,8 +106,10 @@ def result(request):
                             
                     for purchased_product in purchased_products:
                         print(purchased_product,'\t\t\t개수:',purchased_products[purchased_product][0],'\t\t\t가격:',purchased_products[purchased_product][1])
+                        #receipt().objects.create(names = purchased_product, count_quantity=purchased_products[purchased_product][0], price=purchased_products[purchased_product][1])
+                        receipt.objects.create(names = purchased_product, count_quantity=purchased_products[purchased_product][0], member = request.user, price=purchased_products[purchased_product][1])
                     print('총가격:',purchased_products_price)
-                    print('총무게(g):',purchased_products_weights)
+                    print('총무게:',purchased_products_weights)
                 else:
                     print('왜 아무것도 안사요 ㅡ,ㅡ')
                     
@@ -143,14 +146,19 @@ def result(request):
     #     'result': selectedChatResult.content
     # }
     
-    pp = {
-        'purchased_products' : purchased_products,
+    receipts = receipt.objects.all()
+    
+    context = {
         'purchased_products_weights' : purchased_products_weights,
         'purchased_products_price' : purchased_products_price,
+        'receipts':receipts
     }
     
-
-    return render(request, 'payment/result.html',pp)  
+    weights_test = 100
+    if weights_test != purchased_products_weights:
+        return render(request, 'payment/result.html', context)  
+    else:
+        return render(request, 'payment/result.html', context)  
 
 
 def test(request):

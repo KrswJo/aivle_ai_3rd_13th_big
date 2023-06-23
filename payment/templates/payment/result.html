@@ -23,14 +23,19 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    
-
+                                    {% for receipt in receipts %}
+                                        <tr>
+                                            <td>{{receipt.names}}</td>
+                                            <td>{{receipt.count_quantity}}</td>
+                                            <td>{{receipt.price}}</td>
+                                        </tr>
+                                    {% endfor %}
                                     </tbody>
                                 </table>
 
                             </div>
                             <div class="mb-3 text-end">
-                                <label class="mb-2">총액</label>
+                                {{purchased_products_price}}<label class="mb-2">총액</label>
                                 <label class="mb-2 text-muted"></label>
                             </div>
                             <div class="mb-3 text-center">

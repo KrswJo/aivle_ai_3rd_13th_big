@@ -23,22 +23,16 @@ class CostcoPrice(models.Model):
     class Meta:
         managed = False
         db_table = 'costco_price'
-        
-# # class receipt(models.Model):
-# #     date  = models.DateTimeField(auto_now_add = True)
-# #     names = models.CharField(max_length=50)
-# #     price = models.CharField(max_length=50)
-# #     # 회원탈퇴시 데이터 사라짐.
-# #     member = models.ForeignKey("member.User", on_delete = models.CASCADE)
     
-# class receipt(models.Model):
-#     idx = models.BigAutoField(primary_key=True)
-#     date = models.DateTimeField(auto_now_add = True)
-#     names = models.CharField(max_length=50)
-#     price = models.CharField(max_length=50)
-#     member = models.ForeignKey("member.User", on_delete = models.CASCADE)
-#     count_quantity = models.IntegerField()
+class receipt(models.Model):
+    idx = models.BigAutoField(primary_key=True)
+    date = models.DateTimeField(auto_now_add = True)
+    names = models.CharField(max_length=50)
+    price = models.CharField(max_length=50)
+    member = models.ForeignKey("member.User", on_delete = models.CASCADE)
+    count_quantity = models.IntegerField()
 
-#     class Meta:
-#         #managed = False
-#         db_table = 'payment_receipt'
+    class Meta:
+        managed = False
+        db_table = 'payment_receipt'
+        
