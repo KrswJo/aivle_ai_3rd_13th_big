@@ -33,13 +33,22 @@
                                         <thead class="thead-dark">
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">영수증 id</th>
+                                            <th scope="col">주문번호</th>
                                             <th scope="col">날짜</th>
                                             <th scope="col">결제 내역</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        
+                                        {% for Order in Orders %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{Order.Order_id}}</td>
+                                                <td>{{Order.date}}</td>
+                                                <td>
+                                                    <a href="{%url 'member:myreceipt' Order.receipts_id %}" class="btn btn-primary">보기</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>

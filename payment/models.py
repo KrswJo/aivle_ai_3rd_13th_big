@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 # Create your models here.
 
@@ -25,14 +26,13 @@ class CostcoPrice(models.Model):
         db_table = 'costco_price'
     
 class receipt(models.Model):
-    idx = models.BigAutoField(primary_key=True)
-    date = models.DateTimeField(auto_now_add = True)
-    names = models.CharField(max_length=50)
-    price = models.CharField(max_length=50)
+    names = models.TextField(null=True)
+    price = models.TextField(null=True)
+    count_quantity = models.TextField(null=True)
     member = models.ForeignKey("member.User", on_delete = models.CASCADE)
-    count_quantity = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'payment_receipt'
-        
+    
+class Order(models.Model):
+    date = models.DateTimeField(auto_now_add = True)
+    Order_id = models.UUIDField(default=uuid.uuid4, editable=False)
+    member = models.ForeignKey("member.User", on_delete = models.CASCADE)
+    receipts = models.ForeignKey(receipt, on_delete=models.CASCADE)

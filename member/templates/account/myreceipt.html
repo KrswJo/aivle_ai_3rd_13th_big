@@ -1,9 +1,12 @@
-<!--결제 완료 영수증-->
-
 {% extends 'base.html' %}
 {% load static %}
-{% block header %} {% endblock %}
+{% block header %} 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js"></script>
+{% endblock %}
 {% block content %}
+
+
+
     <div class="d-flex align-items-center justify-content-center" style="height: 120vh;">
         <div class="container">
             <div class="row">
@@ -23,29 +26,23 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for name,price,count_quantity in receipts_list%}
+                                        {% for name,price,count_quantity in receipts_list%}
                                         <tr>
                                             <td>{{forloop.counter}}</td>
                                             <td>{{name}}</td>
                                             <td>{{count_quantity}}</td>
                                             <td>{{price}}</td>
                                         </tr>
-                                    {%endfor%}
+                                        {%endfor%}
                                     </tbody>
                                 </table>
 
                             </div>
                             <div class="mb-3 text-end">
-                                <label class="mb-2">총액:</label>{{purchased_products_price}}
+                                <label class="mb-2">총액:</label>{{total_price}}
                                 <label class="mb-2 text-muted"></label>
                             </div>
-                            <div class="mb-3 text-center">
-                                <label class="mb-2 text-muted">결제라인에 가주시길 바랍니다.</label>
-                            </div>
                         </div>
-                    </div>
-                    <div style="padding: 5px 0px 5px 50px ; float:right;">
-                        <a href="{%url 'payment:complete' %}" class="btn btn-primary">그래</a> 
                     </div>
                 </div>
             </div>
@@ -54,6 +51,5 @@
 
 
     <script>
-
     </script>
 {% endblock %}
