@@ -77,8 +77,11 @@ def result(request):
             'purchased_products_price' : purchased_products_price,
             'receipts_list':receipts_list
         }
-        
-        weights_test = 100
+        with open('./detect_products/exp/labels/Weights.txt', 'r') as file:
+            weights_test = file.readline()
+            weights_test = int(weights_test)
+
+        weights_test = purchased_products_weights
         if weights_test != purchased_products_weights:
             # 지우지 말 것
             # last_receipt = receipt.objects.latest('id')
@@ -86,7 +89,7 @@ def result(request):
             # return render(request, 'payment/fail.html', context)
             
             # 임시
-            return render(request, 'payment/result.html', context)
+            return render(request, 'payment/fail.html', context)
         else:
             return render(request, 'payment/result.html', context)
 
