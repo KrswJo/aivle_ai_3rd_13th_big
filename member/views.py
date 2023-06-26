@@ -17,6 +17,20 @@ def mypage(request):
 
     return render(request, 'account/mypage.html',context)
 
+def myreceipt_temp(request):
+        # member_user 테이블의 레코드를 가져와서 객체로 다룹니다.
+    current_user = User.objects.get(pk = request.user.pk) #username: janggh1012
+    Orders = Order.objects.filter(member=request.user)
+    
+    context = {
+        'current_user': current_user,
+        'Orders':Orders       
+    }
+
+    return render(request, 'account/mypage_payment.html',context)
+
+
+
 def myreceipt(request, pk):
     receipt_list = get_object_or_404(receipt, pk=pk)
     

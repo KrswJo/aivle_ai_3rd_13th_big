@@ -26,32 +26,8 @@
                                 <label class="mb-2">회원가입한 날짜   </label>
                                 <label class="mb-2 text-muted">{{current_user.date_joined}}</label>
                             </div>
-                            <div class="mb-3">
-                                <label class="mb-2">상품 결제 내역 </label>
-                                <div>
-                                    <table class="table">
-                                        <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">주문번호</th>
-                                            <th scope="col">날짜</th>
-                                            <th scope="col">결제 내역</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for Order in Orders %}
-                                            <tr>
-                                                <td>{{forloop.counter}}</td>
-                                                <td>{{Order.Order_id}}</td>
-                                                <td>{{Order.date}}</td>
-                                                <td>
-                                                    <a href="{%url 'myreceipt' Order.receipts_id %}" class="btn btn-primary">보기</a>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="d-flex align-items-center">
+                                <a href="{%url 'myreceipt_temp' %}" class="btn btn-primary">구매내역보기</a>
                             </div>
                         </div>
                     </div>
