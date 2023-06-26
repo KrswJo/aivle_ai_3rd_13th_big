@@ -5,3 +5,5 @@ db.sqlite3
 static/img
 */migrations/*
 detect_products/**
+products.jpg
+products.txt
