@@ -9,7 +9,7 @@ import string
 import mlflow
 import mlflow.keras
 logger = logging.getLogger('mylogger')
-from .models import PaymentResult, Result, CostcoPrice, receipt, Order
+from .models import CostcoPrice, receipt, Order
 from .apps import object_detection
 
 import simplejson as json
