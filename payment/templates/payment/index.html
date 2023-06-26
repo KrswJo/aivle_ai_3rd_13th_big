@@ -29,14 +29,14 @@
                                     <div class="card-body p-5">
                                 <form action="result/" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-                <span id="file-module-0">
+                <span id="file-module-0 align-items-center">
                     <fieldset>
                         <legend><h1 class="fs-4 card-title fw-bold mb-2">파일 업로드</h1></legend>
                         <input name="files" type="file" id='ufile'>
 
                     </fieldset>
                 </span>
-    <div><input type="button" onclick="ufilecheck(this.form);" value="결제" class="btn btn-primary ms-auto"></div>
+    <div class="align-items-xl-center"><input type="button" onclick="ufilecheck(this.form);" value="결제" class="btn btn-primary ms-auto"></div>
 </form>
 </div>
 </div>
