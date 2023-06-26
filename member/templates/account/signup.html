@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="mb-2 text-muted" for="signup_card_validity_period">카드 유효연도</label>
-                                    <input id="signup_card_validity_period" type="text" class="form-control" name="card_validity_period"
+                                    <input id="signup_card_validity_period" type="month" class="form-control" name="card_validity_period"
                                            value="" required autofocus maxlength="15">
                                     {% if form.card_validity_period.errors %}
                                         {% for error in form.card_validity_period.errors %}

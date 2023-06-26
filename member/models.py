@@ -2,13 +2,13 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
-import re
+from datetime import datetime
 
 def validate_card_validity_period(value):
-    # 입력된 값이 YYYY MM 형식인지 확인
-    pattern = r'^\d{4} \d{2}$'
-    if not re.match(pattern, value):
-        raise ValidationError('Card validity period should be in YYYY MM format.')
+    current_server_time = datetime.now()
+    current_request_time = datetime.strptime(value, "%Y-%m")
+    if current_request_time.year < current_server_time.year or current_request_time.month < current_server_time.month :
+        raise ValidationError('카드 유효기간이 올바르지 못합니다.')
 
 
 class User(AbstractUser):
@@ -16,12 +16,8 @@ class User(AbstractUser):
     costco_id = models.CharField(max_length=15, unique=True, null=True)
     english_name = models.CharField(max_length=15, unique=False, null=True)
     card_validity_period = models.CharField(
-        max_length=7,
+        max_length=15,
         validators=[
-            RegexValidator(
-                regex=r'^\d{4} \d{2}$',
-                message='정확한 날짜를 입력해 주세요.',
-            ),
             validate_card_validity_period,
         ],
         null=True
