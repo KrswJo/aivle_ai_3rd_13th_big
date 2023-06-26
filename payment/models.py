@@ -2,8 +2,6 @@ from django.db import models
 import uuid
 
 # Create your models here.
-
-    
 class CostcoPrice(models.Model):
     idx = models.AutoField(primary_key=True)
     names = models.CharField(max_length=255, blank=True, null=True)
