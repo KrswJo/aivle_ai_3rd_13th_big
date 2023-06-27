@@ -2317,12 +2317,7 @@ textarea.form-control-lg{
     color:#000;
     background-color:#3CB815;
     border-color:#3CB815;
-    position: absolute;
 }
-.card .btn-primary {
-    bottom: -50px;
-    right: 5px; 
-  }
 
 .btn-primary:hover{
     color:#000;
@@ -3563,9 +3558,6 @@ textarea.form-control-lg{
     background-clip:border-box;
     border:1px solid rgba(0,0,0,0.125);
     border-radius:0;
-    overflow: hidden;
-    width: 500px; 
-
 }
 .card>hr{
     margin-right:0;
