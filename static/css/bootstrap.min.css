@@ -64,6 +64,10 @@ h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{
 h1,.h1{
     font-size:calc(1.375rem + 1.5vw)
 }
+@font-face {
+    font-family: 'PatsySans';
+    src: url('fonts/beastfont.ttf') format('truetype');
+  }
 @media (min-width: 1200px){
     h1,.h1{
         font-size:2.5rem
@@ -6219,8 +6223,9 @@ textarea.form-control-lg{
 .fw-normal{
     font-weight:400 !important
 }
-.fw-bold{
-    font-weight:700 !important
+.fw-bold {
+    font-weight: 700;
+    font-family: 'PatsySans', sans-serif;
 }
 .fw-bolder{
     font-weight:bolder !important
