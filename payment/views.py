@@ -6,8 +6,6 @@ from django.core.files.storage import default_storage
 import numpy as np
 import cv2
 import string
-import mlflow
-import mlflow.keras
 logger = logging.getLogger('mylogger')
 from .models import CostcoPrice, receipt, Order
 from .apps import object_detection
