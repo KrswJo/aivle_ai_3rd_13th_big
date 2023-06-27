@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils import timezone
 import logging
 from django.conf import settings
@@ -18,7 +18,7 @@ def index(request):
     return render(request, 'payment/index.html')
 
 def result(request):
-    if request.method == 'POST' and request.FILES['files']:
+    if request.method == 'POST' and request.FILES['files'] and request.user.is_authenticated:
 
         results=[]
         files = request.FILES.getlist('files')
@@ -93,7 +93,7 @@ def result(request):
         else:
             return render(request, 'payment/result.html', context)
     else:
-        return render(request, 'payment/fail.html', context)
+        return render(request, 'payment/fail.html')
 
 def complete(request):
     receipt_result = receipt.objects.filter(member=request.user).latest('id')
