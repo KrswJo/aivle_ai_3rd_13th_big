@@ -61,8 +61,12 @@
                 <form action="{% url 'payment:result' %}" method="POST" id="recog" enctype="multipart/form-data">
                     <div class="nav-item nav-link">
                         {% csrf_token %}
-                        <label for="photoInput">상품 인식</label>
-                        <input name="files" type="file" accept="image/*" capture="user" id="photoInput">
+                        {% if request.user.is_authenticated %}
+                            <label for="photoInput">상품 인식</label>
+                            <input name = "files" type="file" accept="image/*" capture="user" id="photoInput">
+                        {% else %}
+                            <label onclick="showAlert()" for="photoInput">상품 인식</label>
+                        {% endif %}
                     </div>
                 </form>
                 <a class="nav-item nav-link" href="/payment/result">상품 확인/결제</a>
@@ -132,6 +136,10 @@
 <script src="{% static 'js/main.js' %}"></script>
 </body>
 <script>
+    function showAlert() {
+        alert('로그인해주시기 바랍니다'); // 경고창에 표시할 메시지
+    }
+
     let formData = document.getElementById("recog");
 
     formData.style.display = "";
