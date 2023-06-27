@@ -4,5 +4,6 @@ __pycache__
 db.sqlite3
 */migrations/*
 detect_products/**
-products.jpg
-products.txt
+Products.jpg
+Products.txt
+settings.py
