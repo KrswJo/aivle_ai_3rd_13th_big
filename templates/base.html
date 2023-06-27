@@ -58,12 +58,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <form action="payment/result/" method="POST">
-                    <div class="nav-item nav-link">
+                <div class="nav-item nav-link">
+                    {% if request.user.is_authenticated %}
                         <label for="photoInput">상품 인식</label>
                         <input name = "files" type="file" accept="image/*" capture="user" id="photoInput">
-                    </div>
-                </form>
+                    {% else %}
+                        <label onclick="showAlert()" for="photoInput">상품 인식</label>
+                    {% endif %}
+                </div>
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">게시판</a>
                     <div class="dropdown-menu m-0">
@@ -130,6 +132,11 @@
 <script src="{% static 'js/main.js' %}"></script>
 </body>
 <script>
+    function showAlert() {
+        alert('로그인해주시기 바랍니다'); // 경고창에 표시할 메시지
+    }
+
+
     $(document).ready(function() {
         // 파일 입력 값이 변경되었을 때 처리하는 이벤트 핸들러
         $('#photoInput').on('change', function(e) {
