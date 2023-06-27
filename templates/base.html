@@ -39,6 +39,7 @@
 </head>
 
 <body>
+    <div id="result-container"></div>
 <!-- Spinner Start -->
 <div class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
      id="spinner">
@@ -48,7 +49,7 @@
 <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
     <div class="top-bar row gx-0 align-items-center d-none d-lg-flex">
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn bg-white" data-wow-delay="0.1s">
+    <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
         <a class="navbar-brand ms-4 ms-lg-0" href="/">
             <h1 class="fw-bold text-primary m-0"><span class="text-secondary">Go</span> KarT</h1>
         </a>
@@ -57,10 +58,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <div class="nav-item nav-link">
-                    <label for="photoInput">상품 인식</label>
-                    <input name = "files" type="file" accept="image/*" capture="user" id="photoInput">
-                </div>
+                <form action="payment/result/" method="POST">
+                    <div class="nav-item nav-link">
+                        <label for="photoInput">상품 인식</label>
+                        <input name = "files" type="file" accept="image/*" capture="user" id="photoInput">
+                    </div>
+                </form>
                 <a class="nav-item nav-link" href="/payment/result">상품 확인/결제</a>
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">게시판</a>
@@ -78,7 +81,7 @@
                 {% endif %}
             </div>
             {% if user.is_authenticated %}
-            <div class="ms-2">
+            <div class="d-none d-lg-flex ms-2">
                 <a class="btn-sm-square bg-white rounded-circle ms-3" href="/member/mypage">
                     <small class="fa fa-user text-body"></small>
                 </a>
@@ -138,29 +141,28 @@
             formData.append('files', file);
 
             $.ajax({
-                url: '/payment/result/', // 서버의 URL 끝점 (views.py의 URL 경로와 일치해야 함)
+                url: '/payment/result/',
                 type: 'POST',
                 data: formData,
                 headers: {"X-CSRFToken":"{{ csrf_token }}"},
                 processData: false,
                 contentType: false,
+
                 success: function(response) {
                   // POST 요청이 성공한 경우에 실행할 동작을 여기에 작성
-                  var parser = new DOMParser();
-                  var htmlDoc = parser.parseFromString(response, 'text/html');
-
-                  $('#resultContainer').html(htmlDoc.documentElement.innerHTML);
-                  var newWindow = window.open();
-                  newWindow.document.write(htmlDoc.documentElement.innerHTML);
                   
+                    var parser = new DOMParser();
+                    var htmlDoc = parser.parseFromString(response, 'text/html');
+
+                    const content = htmlDoc.body.querySelector('.min-vh-100');
+                    let target = document.querySelector('.min-vh-100');
+                    target.innerHTML = content.innerHTML;
                 },
                 error: function(xhr, status, error) {
                   // POST 요청이 실패한 경우에 실행할 동작을 여기에 작성
                   console.error('POST 요청이 실패하였습니다:', error);
                 }
-              });  
-
-
+              });
           }
         });
         });

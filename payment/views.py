@@ -92,8 +92,8 @@ def result(request):
             return render(request, 'payment/fail.html', context)
         else:
             return render(request, 'payment/result.html', context)
-
-
+    else:
+        return render(request, 'payment/fail.html', context)
 
 def complete(request):
     receipt_result = receipt.objects.filter(member=request.user).latest('id')
