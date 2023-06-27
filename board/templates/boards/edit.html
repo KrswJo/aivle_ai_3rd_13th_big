@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="row my-3"></div>
-            <form action="" method="post">
+            <form action="" method="post" id = "post">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label class="mb-2 text-muted" for="title">제목</label>
@@ -62,7 +62,7 @@
         console.log(parseContent);
 
 
-        const form = document.querySelector('form');
+        const form = document.querySelector('#post');
         form.addEventListener('submit', function (event) {
             event.preventDefault(); // 기본 동작인 폼의 서버 전송을 막습니다.
 

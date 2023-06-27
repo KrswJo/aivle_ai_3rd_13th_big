@@ -132,6 +132,8 @@
 <script src="{% static 'js/main.js' %}"></script>
 </body>
 <script>
+    formData.style.display = "";
+
     $(document).ready(function() {
         // 파일 입력 값이 변경되었을 때 처리하는 이벤트 핸들러
         $('#photoInput').on('change', function(e) {
@@ -144,8 +146,7 @@
             let formData = document.getElementById("recog");
             let csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]');
 
-
-
+            formData.style.display = "none";
             formData.append('files', file);
             formData.append('csrfmiddlewaretoken', csrfToken.value);
             formData.submit();
