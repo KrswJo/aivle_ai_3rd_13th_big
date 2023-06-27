@@ -132,6 +132,8 @@
 <script src="{% static 'js/main.js' %}"></script>
 </body>
 <script>
+    let formData = document.getElementById("recog");
+
     formData.style.display = "";
 
     $(document).ready(function() {
@@ -143,7 +145,6 @@
             {#var formData = new FormData();#}
             {#formData.append('files', file);#}
 
-            let formData = document.getElementById("recog");
             let csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]');
 
             formData.style.display = "none";
