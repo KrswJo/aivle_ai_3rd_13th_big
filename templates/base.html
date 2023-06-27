@@ -39,6 +39,7 @@
 </head>
 
 <body>
+    <div id="result-container"></div>
 <!-- Spinner Start -->
 <div class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
      id="spinner">
@@ -57,10 +58,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <div class="nav-item nav-link">
-                    <label for="photoInput">상품 인식</label>
-                    <input name = "files" type="file" accept="image/*" capture="user" id="photoInput">
-                </div>
+                <form action="{% url 'payment:result' %}" method="POST" id="recog" enctype="multipart/form-data">
+                    <div class="nav-item nav-link">
+                        {% csrf_token %}
+                        <label for="photoInput">상품 인식</label>
+                        <input name="files" type="file" accept="image/*" capture="user" id="photoInput">
+                    </div>
+                </form>
                 <a class="nav-item nav-link" href="/payment/result">상품 확인/결제</a>
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">게시판</a>
@@ -128,42 +132,53 @@
 <script src="{% static 'js/main.js' %}"></script>
 </body>
 <script>
+    let formData = document.getElementById("recog");
+
+    formData.style.display = "";
+
     $(document).ready(function() {
         // 파일 입력 값이 변경되었을 때 처리하는 이벤트 핸들러
         $('#photoInput').on('change', function(e) {
           // 파일이 선택되었는지 확인
           if (e.target.files.length > 0) {
             var file = e.target.files[0];
-            var formData = new FormData();
+            {#var formData = new FormData();#}
+            {#formData.append('files', file);#}
+
+            let csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]');
+
+            formData.style.display = "none";
             formData.append('files', file);
-
-            $.ajax({
-                url: '/payment/result/', // 서버의 URL 끝점 (views.py의 URL 경로와 일치해야 함)
-                type: 'POST',
-                data: formData,
-                headers: {"X-CSRFToken":"{{ csrf_token }}"},
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                  // POST 요청이 성공한 경우에 실행할 동작을 여기에 작성
-                  var parser = new DOMParser();
-                  var htmlDoc = parser.parseFromString(response, 'text/html');
-
-                  $('#resultContainer').html(htmlDoc.documentElement.innerHTML);
-                  var newWindow = window.open();
-                  newWindow.document.write(htmlDoc.documentElement.innerHTML);
-                  
-                },
-                error: function(xhr, status, error) {
-                  // POST 요청이 실패한 경우에 실행할 동작을 여기에 작성
-                  console.error('POST 요청이 실패하였습니다:', error);
-                }
-              });  
+            formData.append('csrfmiddlewaretoken', csrfToken.value);
+            formData.submit();
 
 
+            {#$.ajax({#}
+            {#    url: '/payment/result/',#}
+            {#    type: 'POST',#}
+            {#    data: formData,#}
+            {#    headers: {"X-CSRFToken":"{{ csrf_token }}"},#}
+            {#    processData: false,#}
+            {#    contentType: false,#}
+            {##}
+            {#    success: function(response) {#}
+            {#      // POST 요청이 성공한 경우에 실행할 동작을 여기에 작성#}
+            {##}
+            {#        var parser = new DOMParser();#}
+            {#        var htmlDoc = parser.parseFromString(response, 'text/html');#}
+            {##}
+            {#        const content = htmlDoc.body.querySelector('.min-vh-100');#}
+            {#        let target = document.querySelector('.min-vh-100');#}
+            {#        target.innerHTML = content.innerHTML;#}
+            {#    },#}
+            {#    error: function(xhr, status, error) {#}
+            {#      // POST 요청이 실패한 경우에 실행할 동작을 여기에 작성#}
+            {#      console.error('POST 요청이 실패하였습니다:', error);#}
+            {#    }#}
+            {#  });#}
           }
         });
-        });
+    });
 </script>
 
 </html>
