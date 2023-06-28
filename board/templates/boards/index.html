@@ -25,14 +25,15 @@
 
                                     {% if request.user_agent.is_mobile %}
                                         <!-- 모바일 화면에서 표시할 내용 -->
-                                            <td><a href="{% url 'boards:detail' post.id %}">{{ post.title|truncatechars:10 }}</a></td>
+                                        <td><a href="{% url 'boards:detail' post.id %}">{{ post.title|truncatechars:7 }}</a></td>
+                                        <td>{{ post.nickname|truncatechars:10 }}</td>
                                     {% else %}
-                                            <td><a href="{% url 'boards:detail' post.id %}">{{ post.title|truncatechars:30 }}</a></td>
                                         <!-- PC 화면에서 표시할 내용 -->
+                                        <td><a href="{% url 'boards:detail' post.id %}">{{ post.title|truncatechars:30 }}</a></td>
+                                        <td>{{ post.nickname|truncatechars:5 }}</td>
                                     {% endif %}
 
-                                    <td>{{ post.nickname|truncatechars:10 }}</td>
-                                    <td>{{ post.created_date|date:"Y-m-d" }}</td>
+                                    <td>{{ post.created_date|date:"y-m-d" }}</td>
                                     <td>{{ post.hit }}</td>
                                 </tr>
                             {% endfor %}
