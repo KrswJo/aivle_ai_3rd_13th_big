@@ -63,7 +63,7 @@
                         {% csrf_token %}
                         {% if request.user.is_authenticated %}
                             <label for="photoInput">상품 인식</label>
-                            <input name = "files" type="file" accept="image/*" capture="environment" id="photoInput">
+                            <input name = "files" type="file" accept="image/*" capture="user" id="photoInput">
                         {% else %}
                             <label onclick="showAlert()" for="photoInput">상품 인식</label>
                         {% endif %}
@@ -83,14 +83,16 @@
                 {% else %}
                     <a class="nav-item nav-link" href="/member/login">로그인</a>
                 {% endif %}
-            </div>
-            {% if user.is_authenticated %}
-            <div class="ms-2">
-                <a class="btn-sm-square bg-white rounded-circle ms-3" href="/member/mypage">
+                {% if user.is_authenticated %}
+                <div class="d-flex align-items-center">
+                <a class="btn-sm-square bg-white rounded-circle" href="/member/mypage">
                     <small class="fa fa-user text-body"></small>
                 </a>
+                <a class="nav-item nav-link px-0" href="/member/mypage">{{ request.user.username }}님</a>
             </div>
             {% endif %}
+            </div>
+            
         </div>
     </nav>
 </div>
