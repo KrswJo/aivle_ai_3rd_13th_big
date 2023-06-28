@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block header %} {% endblock %}
+{% load board_filter %}
+{% block header %} 
+{% endblock %}
 {% block content %}
     <div class="d-flex align-items-center justify-content-center" style="height: 120vh;">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 offset-md-4">
+                <div class="col-md-8 offset-md-2">
                     <!-- 가운데 정렬을 원하는 내용 -->
                     <div class="card shadow-lg">
                         <div class="card-body p-5">
@@ -23,9 +25,9 @@
                                         </thead>
                                         <tbody>
 
-                                        {% for Order in Orders %}
+                                        {% for Order in Order_list %}
                                             <tr>
-                                                <td>{{forloop.counter}}</td>
+                                                <td>{{Order_list.paginator.count|sub:Order_list.start_index|sub:forloop.counter0|add:1}}</td>
                                                 <td>{{Order.Order_id}}</td>
                                                 <td>{{Order.date}}</td>
                                                 <td>
@@ -41,6 +43,22 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-md-12 text-center">
+                    {% if Order_list.has_previous %}
+                        <a href="?page=1">처음</a>
+                        <a href="?page={{ Order_list.previous_page_number }}">이전</a>
+                    {% endif %}
+                    <!-- 페이지리스트 -->
+                    <span style="color:red;font-weight:bold;">{{ Order_list.number }}</span>
+                    <span> / </span>
+                    <span style="font-weight:bold;">{{ Order_list.paginator.num_pages }}</span>
+                    {% if Order_list.has_next %}
+                        <a href="?page={{ Order_list.next_page_number }}">다음</a>
+                        <a href="?page={{ Order_list.paginator.num_pages }}">끝</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

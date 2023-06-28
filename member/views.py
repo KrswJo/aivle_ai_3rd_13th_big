@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.db import connection
 from .models import User
 from payment.models import Order, receipt
+from django.core.paginator import Paginator
 import json
 
 # Create your views here.
@@ -20,11 +21,18 @@ def mypage(request):
 def myreceipt_temp(request):
         # member_user 테이블의 레코드를 가져와서 객체로 다룹니다.
     current_user = User.objects.get(pk = request.user.pk) #username: janggh1012
-    Orders = Order.objects.filter(member=request.user)
+    Order_list = Order.objects.filter(member=request.user).order_by('-id')
+    
+    # 페이지 파라미터 얻기, 없으면 1
+    page = request.GET.get('page', '1')
+ 
+    # 페이지당 10개씩 보여주기
+    paginator = Paginator(Order_list, 10)
+    page_obj = paginator.get_page(page)
     
     context = {
         'current_user': current_user,
-        'Orders':Orders       
+        'Order_list': page_obj,       
     }
 
     return render(request, 'account/mypage_payment.html',context)
