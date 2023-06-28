@@ -11,6 +11,7 @@ from .models import CostcoPrice, receipt, Order
 from .apps import object_detection
 
 import simplejson as json
+import qrcode
 
 def index(request):
     return render(request, 'payment/index.html')
@@ -70,11 +71,27 @@ def result(request):
         receipts = receipt.objects.all()
         receipts_list = zip(name_list, price_list, count_quantity_list)
         
+        url = name_list
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=20,
+            border=10,
+        )
+        qr.add_data(url)
+        qr.make(fit=True)
+
+        img = qr.make_image(fill_color="black", back_color="white")
+        # qr_img = qrcode.make(url)
+        # qr_img.save('static/img/qr_test2.png'
+    
         context = {
             'purchased_products_weights' : purchased_products_weights,
             'purchased_products_price' : purchased_products_price,
-            'receipts_list':receipts_list
+            'receipts_list':receipts_list,
+            'qr_code_image': pil_image_to_base64(img),
         }
+        
         with open('./detect_products/exp/labels/Weights.txt', 'r') as file:
             weights_test = file.readline()
             weights_test = int(weights_test)
@@ -102,3 +119,13 @@ def complete(request):
 
 def fail(request):
     return render(request, 'payment/fail.html')
+
+
+import base64
+from io import BytesIO
+
+def pil_image_to_base64(pil_image):
+    buffered = BytesIO()
+    pil_image.save(buffered, format="PNG")
+    image_base64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
+    return image_base64
