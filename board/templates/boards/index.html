@@ -3,15 +3,11 @@
 {% load static %}
 {% block header %}{% endblock %}
 {% block content %}
-    <div class="container p-3"></div>
-    <div class="row my-5"></div>
-
-    <div class="container-xxl py-6 mt-5">
+    <div class="d-flex align-items-center justify-content-center" style="height: 120vh;">
         <div class="container">
-            <div class="row g-5 justify-content-center ">
-                <div class="row mt-5">
-                    <div class="col-12">
-                        <table class="table">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
                             <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
@@ -33,35 +29,41 @@
                             {% endfor %}
                             </tbody>
                         </table>
-                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                      {% if user.is_authenticated %}
-                        <div style="float:right;">
-                        <a href="{%url 'boards:new' %}" class="btn btn-primary" >글쓰기</a> 
-                        </div>
-                      {% endif %}  
-                    </div>
+                <div class="col-md-12">
+                    {% if user.is_authenticated %}
+        <div style="float:right;">
+        <a href="{%url 'boards:new' %}" class="btn btn-primary" >글쓰기</a>
+        </div>
+      {% endif %}
                 </div>
-                <div class="row my-3">
-                    <div class="col-md-12 text-center">
-                        {% if board_list.has_previous %}
-                            <a href="?page=1">처음</a>
-                            <a href="?page={{ board_list.previous_page_number }}">이전</a>
-                        {% endif %}
-                        <!-- 페이지리스트 -->
-                        <span style="color:red;font-weight:bold;">{{ board_list.number }}</span>
-                        <span> / </span>
-                        <span style="font-weight:bold;">{{ board_list.paginator.num_pages }}</span>
-                        {% if board_list.has_next %}
-                            <a href="?page={{ board_list.next_page_number }}">다음</a>
-                            <a href="?page={{ board_list.paginator.num_pages }}">끝</a>
-                        {% endif %}
-                    </div>
-                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-md-12 text-center">
+        {% if board_list.has_previous %}
+            <a href="?page=1">처음</a>
+            <a href="?page={{ board_list.previous_page_number }}">이전</a>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        <span style="color:red;font-weight:bold;">{{ board_list.number }}</span>
+        <span> / </span>
+        <span style="font-weight:bold;">{{ board_list.paginator.num_pages }}</span>
+        {% if board_list.has_next %}
+            <a href="?page={{ board_list.next_page_number }}">다음</a>
+            <a href="?page={{ board_list.paginator.num_pages }}">끝</a>
+        {% endif %}
+    </div>
             </div>
         </div>
     </div>
+
+
 {% endblock %}
 
+
+<div class="row">
+    <div class="col-12">
+    </div>
+</div>
+<div class="row my-3">
+</div>
