@@ -20,4 +20,7 @@ setuptools>=65.5.1
 mysql-connector-python==8.0.33
 simplejson==3.19.1
 django-user-agents
-pyyaml ua-parser user-agents
+pyyaml 
+ua-parser 
+user-agents
+django-qr-code

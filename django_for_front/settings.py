@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'board',
     'payment',
     'django_user_agents',
+    'qr_code',
 ]
 
 
