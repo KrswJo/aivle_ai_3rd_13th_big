@@ -65,7 +65,7 @@ def result(request):
                     print('총무게:',purchased_products_weights)
                 else:
                     print('왜 아무것도 안사요 ㅡ,ㅡ')
-                    return render(request, 'payment/fail.html', context)
+                    return render(request, 'payment/fail.html')
     
         receipts = receipt.objects.all()
         receipts_list = zip(name_list, price_list, count_quantity_list)
