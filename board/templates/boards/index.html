@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load user_agents %}
 {% load board_filter %}
 {% load static %}
 {% block header %}{% endblock %}
@@ -21,9 +22,18 @@
                             {% for post in board_list %}
                                 <tr>
                                     <td>{{ board_list.paginator.count|sub:board_list.start_index|sub:forloop.counter0|add:1 }}</td>
-                                    <td><a href="{% url 'boards:detail' post.id %}">{{ post.title|truncatechars:30 }}</a></td>
-                                    <td>{{ post.nickname|truncatechars:30 }}</td>
-                                    <td>{{ post.created_date|date:"Y-m-d" }}</td>
+
+                                    {% if request.user_agent.is_mobile %}
+                                        <!-- 모바일 화면에서 표시할 내용 -->
+                                        <td><a href="{% url 'boards:detail' post.id %}">{{ post.title|truncatechars:7 }}</a></td>
+                                        <td>{{ post.nickname|truncatechars:10 }}</td>
+                                    {% else %}
+                                        <!-- PC 화면에서 표시할 내용 -->
+                                        <td><a href="{% url 'boards:detail' post.id %}">{{ post.title|truncatechars:30 }}</a></td>
+                                        <td>{{ post.nickname|truncatechars:5 }}</td>
+                                    {% endif %}
+
+                                    <td>{{ post.created_date|date:"y-m-d" }}</td>
                                     <td>{{ post.hit }}</td>
                                 </tr>
                             {% endfor %}
@@ -56,14 +66,4 @@
             </div>
         </div>
     </div>
-
-
 {% endblock %}
-
-
-<div class="row">
-    <div class="col-12">
-    </div>
-</div>
-<div class="row my-3">
-</div>
