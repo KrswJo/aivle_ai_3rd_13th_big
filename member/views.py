@@ -27,7 +27,7 @@ def myreceipt_temp(request):
     page = request.GET.get('page', '1')
  
     # 페이지당 10개씩 보여주기
-    paginator = Paginator(Order_list, 10)
+    paginator = Paginator(Order_list, 3)
     page_obj = paginator.get_page(page)
     
     context = {
