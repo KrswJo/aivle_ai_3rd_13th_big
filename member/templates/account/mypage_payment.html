@@ -27,7 +27,7 @@
 
                                         {% for Order in Order_list %}
                                             <tr>
-                                                <td>{{Order_list.paginator.count|sub:Order_list.start_index|sub:forloop.counter0|add:1}}</td>
+                                                <td>{{Order_list.start_index|add:forloop.counter0}}</td>
                                                 <td>{{Order.Order_id}}</td>
                                                 <td>{{Order.date}}</td>
                                                 <td>
