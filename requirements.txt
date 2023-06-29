@@ -24,3 +24,4 @@ pyyaml
 ua-parser 
 user-agents
 django-qr-code
+qrcode
