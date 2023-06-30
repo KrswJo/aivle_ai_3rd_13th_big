@@ -120,6 +120,9 @@ def complete(request):
 def fail(request):
     return render(request, 'payment/fail.html')
 
+def loding(request):
+    return render(request,'payment/loding.html')
+
 
 import base64
 from io import BytesIO

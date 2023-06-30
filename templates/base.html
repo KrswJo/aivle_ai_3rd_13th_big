@@ -63,7 +63,7 @@
                         {% csrf_token %}
                         {% if request.user.is_authenticated %}
                             <label for="photoInput">상품 인식</label>
-                            <input name = "files" type="file" accept="image/*" capture="environment" id="photoInput">
+                            <input name = "files" type="file" accept="image/*" capture="user" id="photoInput">
                         {% else %}
                             <label onclick="showAlert()" for="photoInput">상품 인식</label>
                         {% endif %}
